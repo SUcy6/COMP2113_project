@@ -1,7 +1,7 @@
 ### COMP2113_project_text_based_game
-## Progect Name:
+## Project Name:
 ## Team members:
-Group 90
+  Group 90
   Su Changyue 
   Liu Jin 3035639123
 ## Game description:
