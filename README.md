@@ -22,14 +22,12 @@ Game cases:
 > E.g. the falling teris piece from left to right will vanish when it touches the right boundary.
 2. The middle teris piece collides with the falling teris piece. Two pieces combine together to form new middle teris. Accumulatively, the middle active becomes larger and larger.
 3. If the middle teris successfully complete a 3x3 matrix square, this square will disappear and the player gets one point. The remaining parts of middle piece will stay in their location. Even though the remains may be separated, we still look them as one piece.
+```
 
-:green_square::green_square::green_square::green_square:
-              
- :red_square::purple_square::blue_square:
-                   
-:red_square::red_square::purple_square::purple_square:
-     
-:red_square: :purple_square:
+E.g. @@@@                @~~@@@~~                 @
+      @@@  :arrow_right:  ~~@@@~~  :arrow_right:       press 'k':arrow_right: @ @   @ 
+     @@@@                @~~@@@~~                 @                           @
+     @ @                 @ @                      @ @
 
 ## List of features:
 ## List of non-standard libraries:
