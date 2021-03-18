@@ -25,11 +25,11 @@ Game cases:
 
 :green_square::green_square::green_square::green_square:
               
-              :red_square:  :purple_square::blue_square:
+ :red_square::purple_square::blue_square:
                    
-:red_square:  :red_square:  :purple_square::purple_square:
+:red_square::red_square::purple_square::purple_square:
      
-:red_square:                :purple_square:
+:red_square: :purple_square:
 
 ## List of features:
 ## List of non-standard libraries:
