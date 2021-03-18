@@ -24,11 +24,11 @@ Game cases:
 3. If the middle teris successfully complete a 3x3 matrix square, this square will disappear and the player gets one point. The remaining parts of middle piece will stay in their location. Even though the remains may be separated, we still look them as one piece.
 ```
 
-E.g. @@@@                @~~@@@~~                 @
-      @@@  :arrow_right:  ~~@@@~~  :arrow_right:       press 'k':arrow_right: @ @   @ 
-     @@@@                @~~@@@~~                 @                           @
-     @ @                 @ @                      @ @
-
+E.g. @@@@         @***       @
+      @@@    =>    ***  =>       =>   @ @   @ 
+     @@@@         @***       @        @
+     @ @          @ @        @ @
+```
 ## List of features:
 ## List of non-standard libraries:
 ## Compilation and execution instructions:
