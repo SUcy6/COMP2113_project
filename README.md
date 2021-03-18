@@ -33,5 +33,12 @@ E.g. @@@@         @***       @
 5. Special cases: the falling piece collides the middle piece but at the same time one of them touches a boundary. In this case, if after the collision they complete a 3x3 square and after the elimination of the 3x3 square the new formed piece does not touches boundaries, game goes on. If after the collision, nothing disappear or after the elimination the new formed piece still touches a boundary, game over. Overall speaking, the priority of `collision`, `elimination` and `boundary test` is: check collision -> check elimination -> check whether the piece touches boundaries. 
 > If someone does not care about the game score, he/she can play it as dodgeball. Just move the central piece to avoid catching falling pieces. No ending but no scores.:joy::sunglasses::joy: 
 ## List of features:
+1. Information of tetrominoes in the whole interface is stored in a 60x60 2D `array` with element 0 or 1. Element in the x-th row and y-th column represents a point in game interface with coordinates (x, y), with 0 meaning no tiles and 1 meaning a unit of tile.
+2. `Data structure` such as `struct` will be used to create types that describe properteis of tetrominoes, including shape and orientation.
+3. `Dynamic memory` is used to store the tetromino information in the middle tetris as well as the surrounding area. Memory will be released once the user quits the game.
+4. Newly-generated tetrominoes random in position are achieved by random numbers that represent x, y coordinates of the tiles. Random shapes and orientations of tiles are also generated through `random` numbers, each representing one type of tetromino.
+5. `File input and output` are used to save the game record for old users to continue the game.
+6. `Multiple files` are used for codes regarding different aspects, such as creating the grid, reading the input, random tetrominoes generator, score calculator, etc.
+7. The steady falling of tetrominoes are achieved by `Qtimer`.
 ## List of non-standard libraries:
 ## Compilation and execution instructions:
