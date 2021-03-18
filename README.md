@@ -1,5 +1,6 @@
 ### COMP2113_project_text_based_game
-## Project Name: **Tetris Tornado**
+## Project Name: 
+:large_orange_diamond::large_red_diamond:**Tetris Tornado**:large_green_diamond::large_blue_diamond:
 ## Team members:
   Group 90
   Su Changyue 3035534854
