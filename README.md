@@ -15,8 +15,9 @@ In `Tetris Tornado`, various shaped pieces *(called tetrominoes in this game)* f
 - Before the start of each game, choose `Sign in` or `Sign up`. If you are a new player, choose `Sign up` to enter a new username *(which can’t be already exist names)*, then a text file will be made to store game records: username and best score. If you are a skilled player, choose `Sign in` and enter your username, then your game record will be called out. Game starts.
 - A tile:blue_square: will be formed in the middle. Tetrominoes:green_square::green_square::green_square::green_square: will fall onto the playing field from top to bottom, from left to right, from right to left or from bottom to top. Only one teris piece drops in from one of the 4 directions each time.
 - Players control the middle active piece so that the tile will collide falling teris and combine into a new teris. Press `'w'`, `'a'`, `'s'`, `'d'` to move the active piece `up`:arrow_up:, `left`:arrow_left:, `down`:arrow_down:, `right`:arrow_right:. Press `'j'`, `'k'` to rotate the teris `anti-clockwise`:arrow_right_hook: or `clockwise`:leftwards_arrow_with_hook:. Press `'q'` to quit the game and output a file of game status.
+- There is a scoreboard:clipboard::bar_chart: showing username, best score and current score
 
-Game cases:
+Game cases:joystick::
 
 1. The middle tetris piece does not collide the falling teris piece. Falling tetris will disappear when it touches the end-point of its falling direction.
 > E.g. the falling teris piece from left to right will vanish when it touches the right boundary.
