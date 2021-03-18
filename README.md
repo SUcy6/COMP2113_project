@@ -24,10 +24,12 @@ Game cases:
 3. If the middle teris successfully complete a 3x3 matrix square, this square will disappear and the player gets one point. The remaining parts of middle piece will stay in their location. Even though the remains may be separated, we still look them as one piece.
 ```
 E.g. @@@@         @***       @
-      @@@    =>    ***  =>       =>   @ @   @ 
-     @@@@         @***       @        @
+      @@@    =>    ***  =>       press 'k'=>   @ @   @ 
+     @@@@         @***       @                 @
      @ @          @ @        @ @
 ```
+4. If the middle teris piece touches one of the 4 boundaries, game over. The game interface may be 60 x 60.
+5. Special cases: the falling piece collides the middle piece but at the same time one of them touches a boundary. In this case, if after the collision they complete a 3x3 square and after the elimination of the 3x3 square the new formed piece does not touches boundaries, game goes on. If after the collision, nothing disappear or after the elimination the new formed piece still touches a boundary, game over. Overall speaking, the priority of `collision`, `elimination` and `boundary test` is: check collision -> check elimination -> check whether the piece touches boundaries.  
 ## List of features:
 ## List of non-standard libraries:
 ## Compilation and execution instructions:
