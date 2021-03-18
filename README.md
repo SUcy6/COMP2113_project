@@ -23,7 +23,6 @@ Game cases:
 2. The middle teris piece collides with the falling teris piece. Two pieces combine together to form new middle teris. Accumulatively, the middle active becomes larger and larger.
 3. If the middle teris successfully complete a 3x3 matrix square, this square will disappear and the player gets one point. The remaining parts of middle piece will stay in their location. Even though the remains may be separated, we still look them as one piece.
 ```
-
 E.g. @@@@         @***       @
       @@@    =>    ***  =>       =>   @ @   @ 
      @@@@         @***       @        @
