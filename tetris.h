@@ -1,6 +1,5 @@
 #ifndef TETRIS_H 
 #define TETRIS_H
-// g++ -pedantic-errors -std=c++11
 
 // the playing field
 const int height(32), width(62);
@@ -56,7 +55,7 @@ void elimination(); // check whether a 3x3 matrix is formed
 
 
 // falling_ctr.cpp 
-void move(tetris * &mp, tetris * &fp); // move middle piece
+void move(tetris * &mp, tetris * &fp); // move middle piece & fall tetris
 
 void rotate(tetris * &mp, tetris * &fp); // rotate middle piece
 
