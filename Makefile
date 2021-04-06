@@ -1,4 +1,4 @@
-FLAGS = -pedantic-errors -std=c++11 -l ncurses
+FLAGS = -pedantic-errors -std=c++11 -I ~/local/include -I ~/local/include/ncursestw -L ~/local/lib -lncursestw -ldl -pthread
 
 collision.o: check_collision.cpp tetris.h
              g++ $(FLAGS) -c $< 
