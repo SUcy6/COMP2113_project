@@ -1,7 +1,11 @@
 #include <iostream>
+#include <ncurses.h>
+#include "tetris.h"
 using namespace std;
 
-// start the game and input game record
+int main()
+{
+  // start the game and input game record
 
 
 
