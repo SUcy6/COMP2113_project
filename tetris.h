@@ -50,7 +50,9 @@ WINDOW * initial_playwin(int , int ); // initialize playing window
 
 void score(); // update score
 
-void check_complete(); // check whether a 3x3 matrix is formed
+
+// elimination.cpp
+void elimination(); // check whether a 3x3 matrix is formed
 
 
 // falling_ctr.cpp 
