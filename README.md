@@ -41,4 +41,7 @@ E.g. @@@@         @***       @
 6. `Multiple files` are used for codes regarding different aspects, such as creating the grid, reading the input, random tetrominoes generator, score calculator, etc.
 7. The steady falling of tetrominoes are achieved by `Qtimer`.
 ## List of non-standard libraries:
+NUCURSES
 ## Compilation and execution instructions:
+- If you are a freshman to this game, please first type `./freshman.sh` in your terminal to install the ncurses libary.
+- Main Steps:
