@@ -48,7 +48,7 @@ int main()
     cmd = (*mp).ctr;
 
     move(*mp, *fp);
-    elimination(*mp);
+    elimination(*mp, s);
     next(*fp);
     
     if(GameOver){
