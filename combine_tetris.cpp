@@ -1,3 +1,7 @@
+#include <iostream>
+#include "tetris.h"
+using namespace std;
+
 // combine falling tetris and middle tetris to be the new middle tetris
 void combine_tetris ( int ** & middle_tetris, int ** falling_tetris, const int falling_height, const int falling_width,
   const int middle_height, const int middle_width, const int middle_coordinates[2], const int falling_coordinates[2] )
