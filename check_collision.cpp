@@ -1,3 +1,7 @@
+#include <iostream>
+#include "tetris.h"
+using namespace std;
+
 bool check_collision ( int ** falling_tetris, int ** middle_tetris, const int falling_coordinates[2], const int falling_width, const int falling_height,
   const int middle_coordinates[2], const int middle_width, const int middle_height, const int orientation )
 {
