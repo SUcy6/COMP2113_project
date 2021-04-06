@@ -37,20 +37,18 @@ int main()
   tetris * mp = new tetris;
   initial_tetris( *mp );
 
-  // start tetris falling
+  // initialize falling tetris 
   tetris * fp = new tetris;
   initial_tetris( *fp );
   
   char cmd = getch();
   while(cmd != 'q'){
-    // set a value to ctr each time
-    // in case the user does not enter anything
-    (*mp).ctr = 't';
+    
     (*mp).ctr = getch();
     cmd = (*mp).ctr;
 
-	move(*mp, *fp);
-	check_complete(*mp);
+    move(*mp, *fp);
+    elimination(*mp);
     next(*fp);
     
     if(GameOver){
