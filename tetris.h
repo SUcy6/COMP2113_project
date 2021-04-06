@@ -13,7 +13,7 @@ WINDOW * main_win, *score_box;
 
 // game status
 bool GameOver = false;
-int s;
+int s(0); //score
 
 // tetrominoes
 class tetris
@@ -47,11 +47,9 @@ void build_boundary(); // build boundary
 
 WINDOW * initial_playwin(int , int ); // initialize playing window
 
-void score(); // update score
-
 
 // elimination.cpp
-void elimination(); // check whether a 3x3 matrix is formed
+void elimination(tetris * &mp, int &s); // check whether a 3x3 matrix is formed & update score
 
 
 // falling_ctr.cpp 
@@ -63,12 +61,10 @@ void next(); // set next tetris
 
 
 // check_collision.cpp
-bool check_collision ( int ** falling_tetris, int ** middle_tetris, const int falling_coordinates[2], const int falling_width, const int falling_height,
-  const int middle_coordinates[2], const int middle_width, const int middle_height, const int orientation );  // check_collision 
+bool check_collision ( tetris * &mp, tetris * &fp );  // check_collision 
 
 
 // combine_tetris.cpp
-void combine_tetris ( int ** & middle_tetris, int ** falling_tetris, const int falling_height, const int falling_width,
-  const int middle_height, const int middle_width, const int middle_coordinates[2], const int falling_coordinates[2] ); // combine collide pieces
+void combine_tetris ( tetris * &mp, tetris * &fp ); // combine collide pieces
 
 #endif
