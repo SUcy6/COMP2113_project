@@ -24,10 +24,10 @@ Game cases:joystick::
 2. The middle teris piece collides with the falling teris piece. Two pieces combine together to form new middle teris. Accumulatively, the middle active becomes larger and larger.
 3. If the middle teris successfully complete a 3x3 matrix square, this square will disappear and the player gets one point. The remaining parts of middle piece will stay in their location. Even though the remains may be separated, we still look them as one piece.
 ```
-E.g. @@@@         @***       @
-      @@@    =>    ***  =>       press 'k'=>   @ @   @ 
-     @@@@         @***       @                 @
-     @ @          @ @        @ @
+E.g. ####         #***       #
+      ###    =>    ***  =>       press 'k'=>   # #   # 
+     ####         #***       #                 #
+     # #          # #        # #
 ```
 4. If the middle teris piece touches one of the 4 boundaries, game over. The game interface may be 60 x 60.
 5. Special cases: the falling piece collides the middle piece but at the same time one of them touches a boundary. In this case, if after the collision they complete a 3x3 square and after the elimination of the 3x3 square the new formed piece does not touches boundaries, game goes on. If after the collision, nothing disappear or after the elimination the new formed piece still touches a boundary, game over. Overall speaking, the priority of `collision`, `elimination` and `boundary test` is: check collision -> check elimination -> check whether the piece touches boundaries. 
@@ -43,5 +43,5 @@ E.g. @@@@         @***       @
 ## List of non-standard libraries:
 NUCURSES
 ## Compilation and execution instructions:
-- If you are a freshman to this game, please first type `./freshman.sh` in your terminal to install the ncurses libary.
+- If you are a freshman to this game, please first type `./freshman.sh` in your terminal to install the ncurses library.
 - Main Steps:
