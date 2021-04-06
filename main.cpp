@@ -1,6 +1,75 @@
 #include <iostream>
 using namespace std;
 
+// start the game and input game record
+
+
+
+  initscr();    // begin NCURSES mode
+
+  curs_set(0);  // set cursor invisible
+	
+  noecho();     // do not dispaly characters input by user
+    
+  raw();        // forbid line buffering
+
+  refresh();    // display virtual window
+
+  // the main playing window	
+  main_win = initial_playwin(height, width, 0, 0); 
+    
+  // the score field
+  score_box = initial_playwin(sheight, swidth, 0, width+5); 
+  // print content in score box
+  mvprintw(0, width+5+2, "Username: ");
+  mvprintw(2, width+5+2, "Best Score: ");
+  mvprintw(4, width+5+2, "Score: ");
+
+  wrefresh(main_win); // update the main playing window
+  wrefresh(score_box); // update the score field	
+  refresh();
+
+  // initialize middle piece
+  tetris * mp = new tetris;
+  initial_tetris( *mp );
+
+  // start tetris falling
+  tetris * fp = new tetris;
+  initial_tetris( *fp );
+  
+  char cmd = getch();
+  while(cmd != 'q'){
+    // set a value to ctr each time
+    // in case the user does not enter anything
+    (*mp).ctr = 't';
+    (*mp).ctr = getch();
+    cmd = (*mp).ctr;
+
+	move(*mp, *fp);
+	check_complete(*mp);
+    next(*fp);
+    
+    if(GameOver){
+	  break;
+    }   
+  }
+
+  // output game status
+  
+
+  // end the game
+  delete fp;
+  delwin(main_win);
+  delwin(score_box);
+  system("cls");   // clears the screen
+  endwin();        // end NUCURSES mode
+
+  return 0;
+}
+
+
+
+
 // for debugging 
 int main()
 {
