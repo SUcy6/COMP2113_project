@@ -94,6 +94,7 @@ void rotate(tetris * &mp, tetris * &fp)
 void next(tetris * &fp)
 {
   initial_tetris(*fp);
+  wrefresh(main_win);
 }
 
 void falling(tetris * &fp)
