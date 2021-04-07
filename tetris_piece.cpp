@@ -102,11 +102,7 @@ void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W)
       x = 60;
       y = 15;
   }
-  
-  // ***
-  // if the new falling tetris touch 
-  if(check_collision(shape))    
-	game_over=true;	
+  	
 }
 
 void initial_tetris(tetris * &fp)
@@ -119,7 +115,4 @@ void initial_tetris(tetris * &fp)
   // build a tetris piece
   build_tetris((*fp).choice_s, (*fp).choice_p, (*fp).shape, (*fp).H, (*fp).W);
 
-  // ***
-  mvwprintw(score_win, hint_win_height/2, hint_win_width/2-2, "%d", score);
-  wrefresh(score_win);
 }
