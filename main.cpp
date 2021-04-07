@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ncurses.h>
-#include <stdlib.h>
+#include <stdlib.h> // for calling system
+#include <unistd.h> // for calling sleep
 #include "tetris.h"
 
 using namespace std;
@@ -53,6 +54,7 @@ int main()
     cmd = (*mp).ctr;
 
     move(*mp, *fp); // move mp & fall fp
+    sleep(1);
     elimination(*mp, s);
     boundary_test(*mp, field);
     next(*fp);
