@@ -1,6 +1,7 @@
 #include <iostream>
 #include <ncurses.h>
 #include "tetris.h"
+
 using namespace std;
 
 int main()
@@ -21,13 +22,14 @@ int main()
 
   // the main playing window	
   main_win = initial_playwin(height, width, 0, 0); 
+  build_boundary(field);
     
   // the score field
   score_box = initial_playwin(sheight, swidth, 0, width+5); 
   // print content in score box
   mvprintw(0, width+5+2, "Username: ");
   mvprintw(2, width+5+2, "Best Score: ");
-  mvprintw(4, width+5+2, "Score: ");
+  mvprintw(4, width+5+2, "Score: ", "%d", s);
 
   wrefresh(main_win); // update the main playing window
   wrefresh(score_box); // update the score field	
@@ -37,20 +39,23 @@ int main()
   tetris * mp = new tetris;
   initial_tetris( *mp );
 
-  // initialize falling tetris 
+  // initialize falling piece
   tetris * fp = new tetris;
   initial_tetris( *fp );
   
   char cmd = getch();
   while(cmd != 'q'){
-    
+    // initialize ctr to an invalid value each time
+    (*mp).ctr = 'i';
+
     (*mp).ctr = getch();
     cmd = (*mp).ctr;
 
-    move(*mp, *fp);
+    move(*mp, *fp); // move mp & fall fp
     elimination(*mp, s);
+    boundary_test(*mp, field);
     next(*fp);
-    
+
     if(GameOver){
 	  break;
     }   
@@ -68,6 +73,7 @@ int main()
 
   return 0;
 }
+
 
 
 
