@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ncurses.h>
+#include <stdlib.h>
 #include "tetris.h"
 
 using namespace std;
