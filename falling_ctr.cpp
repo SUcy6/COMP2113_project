@@ -96,14 +96,9 @@ void next(tetris * &fp)
   initial_tetris(*fp);
 }
 
-
-void move(tetris * &mp, tetris * &fp)
-{
-  if(check_collision(*mp, *fp) == true){
-	combine_tetris(*mp, *fp);		
-    next(*fp);
-  }
-  else{
+void falling(tetris * &fp)
+{ 
+  if (fp->choice_p == 1) {
     (*fp).y++;
     for(int i = (*fp).H-1; i >= 0; i--){
 	  for(int j = 0; j < (*fp).W; j++){
@@ -114,7 +109,53 @@ void move(tetris * &mp, tetris * &fp)
 	  }
     }
   }
-    wrefresh(main_win);
+  else if (fp->choice_p == 2) {
+    (*fp).y--;
+      for(int i = 0; i < (*fp).W; i++){
+		for(int j = 0; j < (*fp).W; j++){
+			if((*fp).shape[i][j] == 1){
+			  mvwaddch(main_win, (*fp).y+i+1, (*fp).x+j, ' ');
+			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j, '#');
+			}
+		}
+      }
+  }
+  else if (fp->choice_p == 3) {
+    (*fp).x++;
+	  for(int i=0; i < (*fp).H; i++){
+		for(int j=(*fp).W-1; j >= 0; j--){
+			if((*fp).shape[i][j] == 1){
+			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j-1, ' ');
+			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j, '#');
+			}
+		}
+      }     
+  }
+  else if (fp->choice_p == 4) {
+    (*fp).x--;
+	  for(int i=0; i < (*fp).H; i++){
+		for(int j=0; j < (*fp).W; j++){
+			if((*fp).shape[i][j] == 1){
+			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j+1, ' ');
+			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j, '#');
+			}
+		}
+      }  
+  }
+  
+}
+
+void move(tetris * &mp, tetris * &fp)
+{
+  if(check_collision(*mp, *fp) == true){
+	combine_tetris(*mp, *fp);		
+    next(*fp);
+  }
+  else{
+    // free fall
+    falling(*fp);
+  }
+  wrefresh(main_win);
   
   if((*mp).ctr == 'a'){
 	if(check_collision(*mp, *fp) == false){
@@ -157,19 +198,19 @@ void move(tetris * &mp, tetris * &fp)
   else if((*mp).ctr == 's'){
 	if(check_collision(*mp, *fp) == true){
 	  combine_tetris(*mp, *fp);	
-      next(*fp);	
+          next(*fp);	
 	}
-	else{
-      (*mp).y++;
-      for(int i = (*mp).H-1; i >= 0; i--){
-		for(int j = 0; j < (*mp).W; j++){
+      else{
+        (*mp).y++;
+        for(int i = (*mp).H-1; i >= 0; i--){
+	  for(int j = 0; j < (*mp).W; j++){
 			if((*mp).shape[i][j] == 1){
 			  mvwaddch(main_win, (*mp).y+i-1, (*mp).x+j, ' ');
 			  mvwaddch(main_win, (*mp).y+i, (*mp).x+j, '#');
 			}
 		}
+        }
       }
-	}
     wrefresh(main_win);
   }
 
@@ -188,7 +229,7 @@ void move(tetris * &mp, tetris * &fp)
 			}
 		}
       }
-	}
+      }
     wrefresh(main_win);
   }
   
