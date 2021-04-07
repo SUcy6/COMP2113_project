@@ -43,7 +43,7 @@ void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W);
 
 
 // playing_field.cpp
-void build_boundary(); // build boundary
+void build_boundary(int field[][62]); // build boundary
 
 WINDOW * initial_playwin(int , int ); // initialize playing window
 
@@ -57,7 +57,9 @@ void move(tetris * &mp, tetris * &fp); // move middle piece & fall tetris
 
 void rotate(tetris * &mp, tetris * &fp); // rotate middle piece
 
-void next(); // set next tetris
+void next(tetris * &fp); // set next tetris
+
+void falling(tetris * &fp); // control tetris falling
 
 
 // check_collision.cpp
