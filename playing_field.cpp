@@ -4,7 +4,7 @@
 
 using namespace std;
 
-void build_boundary()
+void build_boundary(int field[][62])
 {
   for(int i = 0;i < 32; i++){
 	for(int j = 0;j < 62; j++){
