@@ -31,7 +31,7 @@ public:
   // the height and width of a piece
   int H;
   int W;
-}
+};
 
 // middle tetrominoes
 class mtetris
@@ -53,7 +53,7 @@ class mtetris
   
     // the user input about tetris movement 
     char ctr;
-}
+};
 
 // tetris_piece.cpp
 void initial_tetris(tetris * &fp)  // initialize tetris piece
