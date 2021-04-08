@@ -1,7 +1,7 @@
 #include <vector>
 using namespace std;
 
-void elimination ( tetris & mp, int ** & middle_tetris )
+void elimination ( tetris & mp, int ** & middle_tetris, int & score )
 {
   class Elimination {
   public:
@@ -87,10 +87,10 @@ void elimination ( tetris & mp, int ** & middle_tetris )
     for ( int x = eliminations[i].x; x < eliminations[i].x + eliminations[i].size; x++ ) {
       for ( int y = eliminations[i].y; y < eliminations[i].y + eliminations[i].size; y++ ) {
         middle_tetris [x][y] = 0;
+        score += 10;
       }
     }
   }
 
   delete[] check_tetris;
 }
-
