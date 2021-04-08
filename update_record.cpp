@@ -60,7 +60,7 @@ void update_record ( int new_score, string new_username )
 
   system("rm gamerecord.txt");
 
-  // remane temp.txt to gamerecords.txt
+  // rename temp.txt to gamerecords.txt
   system("mv temp.txt gamerecord.txt");
 
 }
