@@ -15,8 +15,8 @@ WINDOW * main_win, *score_box;
 bool GameOver = false;
 int s(0); //score
 
-// tetrominoes
-class tetris
+// falling tetrominoes
+class ftetris
 {
 public:
 
@@ -31,9 +31,28 @@ public:
   // the height and width of a piece
   int H;
   int W;
+}
 
-  // the user input about tetris movement 
-  char ctr;
+// middle tetrominoes
+class mtetris
+{
+  public: 
+    // the coordinate of middle tetris
+    int x;
+    int y;
+  
+    // the height an width of middle tetris
+    int H;
+    int W;
+  
+    // the shapre of middle tetris
+    int ** middle_tetris = new int * [middle_height];
+    for (int i = 0; i <= middle_height; i++) {
+      middle_tetris[i] = new int[middle_width];
+    }
+  
+    // the user input about tetris movement 
+    char ctr;
 }
 
 // tetris_piece.cpp
