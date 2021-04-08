@@ -4,7 +4,7 @@
 #include <unistd.h> // for calling sleep
 #include "tetris.h"
 #include <fstream>
-#include <sstring>
+#include <sstream>
 #include <string>
 
 using namespace std;
