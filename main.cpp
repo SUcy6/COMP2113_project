@@ -3,38 +3,68 @@
 #include <stdlib.h> // for calling system
 #include <unistd.h> // for calling sleep
 #include "tetris.h"
+#include <fstream>
+#include <sstring>
+#include <string>
 
 using namespace std;
 
 int main()
 {
-  // start the game and input game record
+  // choose game mode and read game record
+  string username;
+  int best_score;
 
+  cout << "1: New User 2: Use an Existing Username" << endl;
+  cout << "Please input your choice: ";
+  cin >> choice;
+  cout << "Please input your username: ";
+  cin >> username;
 
+  // new user
+  if ( choice == '1' ) {
+    best_score = 0;
+  }
+  // old user
+  else {
+    ifstream fin;
+    fin.open("gamerecord.txt");
+    string record, past_user;
+    int past_score;
+    while (getline(fin, record)) {
+      istringstream iss(record);
+      record >> past_user >> past_score;
+      if (past_user == username) {
+        best_score = past_score;
+        break;
+      }
+    }
+    fin.close();
+  }
 
   initscr();    // begin NCURSES mode
 
   curs_set(0);  // set cursor invisible
-	
+
   noecho();     // do not dispaly characters input by user
-    
+
   raw();        // forbid line buffering
 
   refresh();    // display virtual window
 
-  // the main playing window	
-  main_win = initial_playwin(height, width, 0, 0); 
+  // the main playing window
+  main_win = initial_playwin(height, width, 0, 0);
   build_boundary(field);
-    
+
   // the score field
-  score_box = initial_playwin(sheight, swidth, 0, width+5); 
+  score_box = initial_playwin(sheight, swidth, 0, width+5);
   // print content in score box
   mvprintw(0, width+5+2, "Username: ");
   mvprintw(2, width+5+2, "Best Score: ");
   mvprintw(4, width+5+2, "Score: ", "%d", s);
 
   wrefresh(main_win); // update the main playing window
-  wrefresh(score_box); // update the score field	
+  wrefresh(score_box); // update the score field
   refresh();
 
   // initialize middle piece
@@ -44,7 +74,7 @@ int main()
   // initialize falling piece
   tetris * fp = new tetris;
   initial_tetris( *fp );
-  
+
   char cmd = getch();
   while(cmd != 'q'){
     // initialize ctr to an invalid value each time
@@ -61,11 +91,11 @@ int main()
 
     if(GameOver){
 	  break;
-    }   
+    }
   }
 
   // output game status
-  
+
 
   // end the game
   delete fp;
@@ -74,44 +104,7 @@ int main()
   system("cls");   // clears the screen
   endwin();        // end NUCURSES mode
 
+  update_record (score, username);
+
   return 0;
-}
-
-
-
-
-
-// for debugging 
-int main()
-{
-  // initial values
-  int middle_width = 1, middle_height = 1, falling_width, falling_height, falling_coordinates[2], middle_coordinates[2] = {30, 30};
-
-  // middle tetris declaration
-  int ** middle_tetris = new int * [middle_height];
-  for (int i = 0; i <= middle_height; i++) {
-    middle_tetris[i] = new int[middle_width];
-  }
-
-  middle_tetris[0][0] = 1;
-
-  // debugging test (to be modified)
-  falling_width = falling_height = 2;
-  falling_coordinates[0] = 30;
-  falling_coordinates[1] = 30;
-
-  // falling tetris declaration
-  int ** falling_tetris = new int * [falling_height];
-  for (int i = 0; i <= falling_height; i++) {
-    falling_tetris[i] = new int[falling_width];
-  }
-  
-  // falling tetris initialization
-  for (int i = 0; i < falling_height; i++) {
-    for (int j = 0; j < falling_widtht; j++) {
-      falling_tetris[i][j] = 1;
-    }
-  }
-
-  int orientation = 4; // 1 left 2 right 3 up 4 down
 }
