@@ -1,9 +1,7 @@
-// one error to be solved
-
 #include <vector>
 using namespace std;
 
-void elimination ( int ** & middle_tetris, int middle_coordinates[2], int middle_width, int middle_height )
+void elimination ( tetris & mp, int ** & middle_tetris )
 {
   class Elimination {
   public:
@@ -14,20 +12,20 @@ void elimination ( int ** & middle_tetris, int middle_coordinates[2], int middle
 
   vector<Elimination> eliminations;
 
-  int upper_bound = middle_coordinates[0];
-  int lower_bound = middle_coordinates[0] + middle_height - 1;
-  int left_bound = middle_coordinates[1];
-  int right_bound = middle_coordinates[1] + middle_width - 1;
+  int upper_bound = mp.y;
+  int lower_bound = mp.y + mp.H - 1;
+  int left_bound = mp.x;
+  int right_bound = mp.x + mp.W - 1;
 
   // check_tetris declaration: 0 if no tile or checked; 1 for unchecked tile
-  int ** check_tetris = new int * [middle_height];
-  for (int i = 0; i < middle_height; i++) {
-    check_tetris[i] = new int [middle_width];
+  int ** check_tetris = new int * [mp.H];
+  for (int i = 0; i < mp.H; i++) {
+    check_tetris[i] = new int [mp.W];
   }
 
   // check_tetris initialization
-  for (int i = 0; i < middle_height; i++) {
-    for (int j = 0; j < middle_width; j++) {
+  for (int i = 0; i < mp.H; i++) {
+    for (int j = 0; j < mp.W; j++) {
       if (middle_tetris[i][j] == 1) {
         check_tetris[i][j] = 1;
       }
@@ -38,7 +36,7 @@ void elimination ( int ** & middle_tetris, int middle_coordinates[2], int middle
   }
 
   // middle tetris larger than 3x3
-  if ( middle_width >= 3 && middle_height >= 3 ) {
+  if ( mp.W >= 3 && mp.H >= 3 ) {
     int i = upper_bound, j = left_bound;
     while ( check_tetris[i][j] == 1 && i < lower_bound - 1 && j < right_bound - 1 ) {
       if ( middle_tetris [i][j] == 1 && middle_tetris [i][j + 1] == 1 && middle_tetris [i][j + 2] == 1 &&
@@ -50,7 +48,7 @@ void elimination ( int ** & middle_tetris, int middle_coordinates[2], int middle
         int current_side = 3;
         bool flag = 1;
         // find the biggest square
-        while ( i + current_side <= lower_bound && j + current_side <= middle_width ) {
+        while ( i + current_side <= lower_bound && j + current_side <= mp.W ) {
           // check larger square
           for ( int k = 0; k < current_side + 1; k++ ) {
             if ( middle_tetris [i + current_side] [j + k] != 1 ) {
@@ -95,3 +93,4 @@ void elimination ( int ** & middle_tetris, int middle_coordinates[2], int middle
 
   delete[] check_tetris;
 }
+
