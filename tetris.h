@@ -45,12 +45,6 @@ class mtetris
     int H;
     int W;
   
-    // the shapre of middle tetris
-    int ** middle_tetris = new int * [middle_height];
-    for (int i = 0; i <= middle_height; i++) {
-      middle_tetris[i] = new int[middle_width];
-    }
-  
     // the user input about tetris movement 
     char ctr;
 };
