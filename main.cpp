@@ -34,7 +34,9 @@ int main()
     int past_score;
     while (getline(fin, record)) {
       istringstream iss(record);
-      record >> past_user >> past_score;
+      string past_user;
+      int past_score;
+      iss >> past_user >> past_score;
       if (past_user == username) {
         best_score = past_score;
         break;
