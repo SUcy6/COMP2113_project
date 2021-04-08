@@ -14,6 +14,7 @@ int main()
   // choose game mode and read game record
   string username;
   int best_score;
+  int choice;
 
   cout << "1: New User 2: Use an Existing Username" << endl;
   cout << "Please input your choice: ";
