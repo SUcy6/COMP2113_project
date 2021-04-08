@@ -50,7 +50,7 @@ class mtetris
 };
 
 // tetris_piece.cpp
-void initial_tetris(tetris * &fp)  // initialize tetris piece
+void initial_tetris(tetris * &fp);  // initialize tetris piece
 
 void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W);  // build tetris
 
