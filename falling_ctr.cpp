@@ -244,3 +244,25 @@ void move(tetris * &mp, tetris * &fp)
   }
 
 }
+
+bool falling_boundary ( ftetris p )
+{
+  for ( int i = 0; i < 4; i++ ) {
+    for ( int j = 0; j < 4; j++ ) {
+      if ( p.shape[i][j] == 1 && ( p.x + i == 0 || p.x + i > 30 || p.y + j == 0 || p.y + j > 60 )) {
+        return 1;
+      }
+    }
+  }
+}
+
+bool middle_boundary ( mtetris p, int middle_tetris ) 
+{
+  for ( int i = 0; i < p.H; i++ ) {
+    for ( int j = 0; j < p.W; j++ ) {
+      if ( middle_tetris[i][j] == 1 && ( p.x + i == 0 || p.x + i > 30 || p.y + j == 0 || p.y + j > 60 )) {
+        return 1;
+      }
+    }
+  }
+}
