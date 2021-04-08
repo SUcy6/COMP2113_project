@@ -256,7 +256,7 @@ bool falling_boundary ( ftetris p )
   }
 }
 
-bool middle_boundary ( mtetris p, int middle_tetris ) 
+bool middle_boundary ( mtetris p, int ** middle_tetris ) 
 {
   for ( int i = 0; i < p.H; i++ ) {
     for ( int j = 0; j < p.W; j++ ) {
