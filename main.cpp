@@ -71,8 +71,16 @@ int main()
   refresh();
 
   // initialize middle piece
-  tetris * mp = new tetris;
-  initial_tetris( *mp );
+  tetris mp;
+  mp.M = 1;
+  mp.W = 1;
+  mp.x = 30;
+  mp.y = 15;
+	
+  int ** middle_tetris = new int * [mp.H];
+  for (int i = 0; i < mp.H; i++) {
+    middle_tetris[i] = new int [mp.W];
+  }
 
   // initialize falling piece
   tetris * fp = new tetris;
