@@ -106,7 +106,7 @@ int main()
   }
 
   // output game status
-
+  update_record ( s, username );
 
   // end the game
   delete fp;
