@@ -34,9 +34,4 @@ WINDOW * initial_playwin(int Height, int Width, int a, int b)
   return win;
 }
 
-void boundary_test(mtetris mp, int field[][62])
-{
-  if((mp).x + (mp).W + 1 > width || (mp).x < 1 || (mp).y + (mp).H + 1 > height || (mp).y < 1){
-	GameOver = true;
-  }
-}
+
