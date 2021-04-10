@@ -18,15 +18,18 @@ tetris_piece.o: tetris_piece.cpp tetris.h
 falling_ctr.o: falling_ctr.cpp tetris.h
                g++ $(FLAGS) -c $<
 
+update_record.o: falling_ctr.cpp tetris.h
+                 g++ $(FLAGS) -c $<
+
 main.o: main.cpp tetris.h
         g++ $(FLAGS) -c $<
 
-main: main.o tetris_piece.o playing_field.o elimination.o combine.o collision.o falling_ctr.o
+main: main.o tetris_piece.o playing_field.o elimination.o combine.o collision.o falling_ctr.o update_record.o
       g++ $(FLAGS) $^ -o $@ 
 
 
 clean:
-      rm -f main main.o tetris_piece.o playing_field.o elimination.o combine.o collision.o falling_ctr.o main.tgz
+      rm -f main main.o tetris_piece.o playing_field.o elimination.o combine.o collision.o falling_ctr.o update_record.o main.tgz
 tar:
       tar -czvf main.tgz *.cpp *.h
 .PHONY: clean tar  
