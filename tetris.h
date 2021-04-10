@@ -62,7 +62,7 @@ WINDOW * initial_playwin(int, int, int, int); // initialize playing window
 
 
 // elimination.cpp
-void elimination(mtetris * &mp, int &s); // check whether a 3x3 matrix is formed & update score
+void elimination(mtetris &mp, int &s); // check whether a 3x3 matrix is formed & update score
 
 
 // falling_ctr.cpp 
@@ -73,6 +73,10 @@ void rotate(mtetris  &mp, ftetris * &fp); // rotate middle piece
 void next(ftetris * &fp); // set next tetris
 
 void falling(ftetris * &fp); // control tetris falling
+
+bool falling_boundary ( ftetris * &p );
+
+bool middle_boundary ( mtetris p, int ** middle_tetris );
 
 
 // check_collision.cpp
