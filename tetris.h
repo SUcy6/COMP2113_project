@@ -50,7 +50,7 @@ class mtetris
 };
 
 // tetris_piece.cpp
-void initial_tetris(tetris * &fp);  // initialize tetris piece
+void initial_tetris(ftetris * &fp);  // initialize tetris piece
 
 void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W);  // build tetris
 
@@ -58,29 +58,29 @@ void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W);
 // playing_field.cpp
 void build_boundary(int field[][62]); // build boundary
 
-WINDOW * initial_playwin(int , int ); // initialize playing window
+WINDOW * initial_playwin(int, int, int, int); // initialize playing window
 
 
 // elimination.cpp
-void elimination(tetris * &mp, int &s); // check whether a 3x3 matrix is formed & update score
+void elimination(mtetris * &mp, int &s); // check whether a 3x3 matrix is formed & update score
 
 
 // falling_ctr.cpp 
-void move(tetris * &mp, tetris * &fp); // move middle piece & fall tetris
+void move(mtetris  &mp, ftetris * &fp); // move middle piece & fall tetris
 
-void rotate(tetris * &mp, tetris * &fp); // rotate middle piece
+void rotate(mtetris  &mp, ftetris * &fp); // rotate middle piece
 
-void next(tetris * &fp); // set next tetris
+void next(ftetris * &fp); // set next tetris
 
-void falling(tetris * &fp); // control tetris falling
+void falling(ftetris * &fp); // control tetris falling
 
 
 // check_collision.cpp
-bool check_collision ( tetris * &mp, tetris * &fp );  // check_collision 
+bool check_collision ( mtetris  &mp, ftetris * &fp );  // check_collision 
 
 
 // combine_tetris.cpp
-void combine_tetris ( tetris * &mp, tetris * &fp ); // combine collide pieces
+void combine_tetris ( mtetris  &mp, ftetris * &fp ); // combine collide pieces
 
 // update_record.cpp 
 void update_record ( int new_score, string new_username ); // update record
