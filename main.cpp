@@ -72,7 +72,7 @@ int main()
 
   // initialize middle piece
   mtetris mp;
-  mp.M = 1;
+  mp.H = 1;
   mp.W = 1;
   mp.x = 30;
   mp.y = 15;
@@ -83,7 +83,7 @@ int main()
   }
 
   // initialize falling piece
-  ftetris * fp = new tetris;
+  ftetris * fp = new ftetris;
   initial_tetris( *fp );
 
   char cmd = getch();
