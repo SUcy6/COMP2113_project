@@ -1,4 +1,5 @@
 #include <vector>
+#include "tetris.h"
 using namespace std;
 
 void elimination ( tetris & mp, int ** & middle_tetris, int & score )
