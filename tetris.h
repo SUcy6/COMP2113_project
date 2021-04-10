@@ -83,6 +83,6 @@ bool check_collision ( mtetris  &mp, ftetris * &fp );  // check_collision
 void combine_tetris ( mtetris  &mp, ftetris * &fp ); // combine collide pieces
 
 // update_record.cpp 
-void update_record ( int new_score, string new_username ); // update record
+void update_record ( int new_score, std::string new_username ); // update record
 
 #endif
