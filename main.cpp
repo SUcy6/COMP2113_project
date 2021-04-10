@@ -71,7 +71,7 @@ int main()
   refresh();
 
   // initialize middle piece
-  tetris mp;
+  mtetris mp;
   mp.M = 1;
   mp.W = 1;
   mp.x = 30;
@@ -83,21 +83,21 @@ int main()
   }
 
   // initialize falling piece
-  tetris * fp = new tetris;
+  ftetris * fp = new tetris;
   initial_tetris( *fp );
 
   char cmd = getch();
   while(cmd != 'q'){
     // initialize ctr to an invalid value each time
-    (*mp).ctr = 'i';
+    (mp).ctr = 'i';
 
-    (*mp).ctr = getch();
-    cmd = (*mp).ctr;
+    (mp).ctr = getch();
+    cmd = (mp).ctr;
 
-    move(*mp, *fp); // move mp & fall fp
+    move(mp, *fp); // move mp & fall fp
     sleep(1);
-    elimination(*mp, s);
-    boundary_test(*mp, field);
+    elimination(mp, s);
+    boundary_test(mp, field);
     next(*fp);
 
     if(GameOver){
