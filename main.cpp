@@ -106,7 +106,7 @@ int main()
   }
 
   // output game status
-  update_record ( s, username );
+  update_record (score, username);
 
   // end the game
   delete fp;
@@ -115,7 +115,7 @@ int main()
   system("cls");   // clears the screen
   endwin();        // end NUCURSES mode
 
-  update_record (score, username);
+  
 
   return 0;
 }
