@@ -144,6 +144,10 @@ void falling(tetris * &fp)
       }  
   }
   
+  if (falling_boundary ( fp )) {
+    initial_tetris(fp);
+  }
+  
 }
 
 void move(tetris * &mp, tetris * &fp)
@@ -240,7 +244,7 @@ void move(tetris * &mp, tetris * &fp)
 
 }
 
-bool falling_boundary ( ftetris p )
+bool falling_boundary ( ftetris * &p )
 {
   for ( int i = 0; i < 4; i++ ) {
     for ( int j = 0; j < 4; j++ ) {
