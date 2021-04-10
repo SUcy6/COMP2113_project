@@ -237,11 +237,6 @@ void move(tetris * &mp, tetris * &fp)
   else if ((*mp).ctr == 'j' || (*mp).ctr == 'k'){
       rotate(*mp, *fp);
   }
-  
-  // middle piece touch boundary
-  if((*mp).x + (*mp).W + 1 > width || (*mp).x < 1 || (*mp).y + (*mp).H + 1 > height || (*mp).y < 1){
-	GameOver = true;
-  }
 
 }
 
