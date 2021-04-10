@@ -62,10 +62,10 @@ int main()
   // the score field
   score_box = initial_playwin(sheight, swidth, 0, width+5);
   // print content in score box
-  mvprintw(0, width+5+2, "Username: ");
-  mvprintw(2, width+5+2, "Best Score: ");
+  mvprintw(0, width+5+2, "Username: ", "%s", username);
+  mvprintw(2, width+5+2, "Best Score: ", "%d", best_score);
   mvprintw(4, width+5+2, "Score: ", "%d", s);
-
+	
   wrefresh(main_win); // update the main playing window
   wrefresh(score_box); // update the score field
   refresh();
