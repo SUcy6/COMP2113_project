@@ -97,7 +97,7 @@ int main()
     move(mp, *fp); // move mp & fall fp
     sleep(1);
     elimination(mp, s);
-    boundary_test(mp, field);
+    GameOver = middle_boundary(mp, middle_tetris);
     next(*fp);
 
     if(GameOver){
