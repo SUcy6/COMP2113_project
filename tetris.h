@@ -1,6 +1,7 @@
 #ifndef TETRIS_H 
 #define TETRIS_H
 #include <ncurses.h>
+#include <string>
 
 // the playing field
 const int height(32), width(62);
@@ -82,7 +83,7 @@ bool check_collision ( mtetris  &mp, ftetris * &fp );  // check_collision
 
 
 // combine_tetris.cpp
-void combine_tetris ( mtetris  &mp, ftetris * &fp ); // combine collide pieces
+void combine_tetris ( int ** & middle_tetris, mtetris  &mp, ftetris ** fp ); // combine collide pieces
 
 // update_record.cpp 
 void update_record ( int new_score, std::string new_username ); // update record
