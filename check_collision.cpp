@@ -1,39 +1,37 @@
-#include <iostream>
 #include "tetris.h"
-using namespace std;
 
-bool check_collision ( int ** falling_tetris, int ** middle_tetris, const int falling_coordinates[2], const int falling_width, const int falling_height,
-  const int middle_coordinates[2], const int middle_width, const int middle_height, const int orientation )
+// check collision
+bool check_collision ( tetris * fp, tetris * mp, int ** middle_tetris, int orientation )
 {
   // update the falling tetris by the next movement
   int next_coordinates[2];
   // 1: left 2: right 3: up 4: down
   if (orientation == 1) {
-    next_coordinates[0] = falling_coordinates[0] - 1;
-    next_coordinates[1] = falling_coordinates[1];
+    next_coordinates[0] = fp.x - 1;
+    next_coordinates[1] = fp.y;
   }
   else if (orientation == 2) {
-    next_coordinates[0] = falling_coordinates[0] + 1;
-    next_coordinates[1] = falling_coordinates[1];
+    next_coordinates[0] = fp.x + 1;
+    next_coordinates[1] = fp.y;
   }
   else if (orientation == 3) {
-    next_coordinates[0] = falling_coordinates[0];
-    next_coordinates[1] = falling_coordinates[1] - 1;
+    next_coordinates[0] = fp.x;
+    next_coordinates[1] = fp.y - 1;
   }
   else if (orientation == 4) {
-    next_coordinates[0] = falling_coordinates[0];
-    next_coordinates[1] = falling_coordinates[1] + 1;
+    next_coordinates[0] = fp.x;
+    next_coordinates[1] = fp.y + 1;
   }
 
   // decide the four boundaries of smaller and larger tetris
-  int smaller_left = (middle_width > falling_width) ? next_coordinates[0] : middle_coordinates[0];
-  int larger_left = (middle_width > falling_width) ? middle_coordinates[0] : next_coordinates[0];
-  int smaller_right = (middle_width > falling_width) ? (next_coordinates[0] + falling_width - 1) : (middle_coordinates[0] + middle_width - 1);
-  int larger_right = (middle_width > falling_width) ? (middle_coordinates[0] + middle_width - 1) : (next_coordinates[0] + falling_width - 1);
-  int smaller_upper = (middle_height > falling_height) ? next_coordinates[1] : middle_coordinates[1];
-  int larger_upper = (middle_height > falling_height) ? middle_coordinates[1] : next_coordinates[1];
-  int smaller_lower = (middle_height > falling_height) ? (next_coordinates[1] + falling_height - 1) : (middle_coordinates[1] + middle_height - 1);
-  int larger_lower = (middle_height > falling_height) ? (middle_coordinates[1] + middle_height - 1) : (next_coordinates[1] + falling_height - 1);
+  int smaller_left = (mp.W > fp.W) ? next_coordinates[0] : mp.x;
+  int larger_left = (mp.W > fp.W) ? mp.x : next_coordinates[0];
+  int smaller_right = (mp.W > fp.W) ? (next_coordinates[0] + fp.W - 1) : (mp.x + mp.W - 1);
+  int larger_right = (mp.W > fp.W) ? (mp.x + mp.W - 1) : (next_coordinates[0] + fp.W - 1);
+  int smaller_upper = (mp.H > mp.H) ? next_coordinates[1] : mp.y;
+  int larger_upper = (mp.H > fp.H) ? mp.y : next_coordinates[1];
+  int smaller_lower = (mp.H > fp.H) ? (next_coordinates[1] + fp.H - 1) : (mp.y + mp.H - 1);
+  int larger_lower = (mp.H > fp.H) ? (mp.y + mp.H - 1) : (next_coordinates[1] + fp.H - 1);
 
   int overlapping_right, overlapping_left, overlapping_upper, overlapping_lower;
 
@@ -77,7 +75,7 @@ bool check_collision ( int ** falling_tetris, int ** middle_tetris, const int fa
   if (overlapping_upper != -1 && overlapping_left != -1) {
     for (int i = overlapping_upper; i <= overlapping_lower; i++) {
       for (int j = overlapping_left; j <= overlapping_right; j++) {
-        if (falling_tetris[i - next_coordinates[0]][j - next_coordinates[1]] == 1 && middle_tetris[i - middle_coordinates[0]][j - middle_coordinates[1]] == 1) {
+        if (fp.shape[i - next_coordinates[0]][j - next_coordinates[1]] == 1 && middle_tetris[i - mp.x][j - mp.y] == 1) {
           flag = 1;
           break;
         }
@@ -87,3 +85,4 @@ bool check_collision ( int ** falling_tetris, int ** middle_tetris, const int fa
 
   return flag;
 }
+
