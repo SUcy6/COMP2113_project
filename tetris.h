@@ -1,5 +1,6 @@
 #ifndef TETRIS_H 
 #define TETRIS_H
+#include <ncurses.h>
 
 // the playing field
 const int height(32), width(62);
@@ -7,9 +8,6 @@ int field[height][width];
 
 // the score field
 const int sheight(15), swidth(30);
-
-// required windows
-WINDOW * main_win, *score_box;
 
 // game status
 bool GameOver = false;
