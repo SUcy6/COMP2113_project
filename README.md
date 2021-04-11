@@ -43,5 +43,5 @@ E.g. ####         #***       #
 ## List of non-standard libraries:
 NCURSES
 ## Compilation and execution instructions:
-- If you are a freshman to this game, please first type `./freshman.sh` in your terminal to install the ncurses library.
+- If you are a freshman to this game, please first type `./freshman.sh` in your terminal to install the ncurses library.(It will take a few minutes :D)
 - Main Steps:
