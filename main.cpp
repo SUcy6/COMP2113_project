@@ -97,7 +97,7 @@ int main()
 
     move(mp, middle_tetris, &fp); // move mp & fall fp
     sleep(1);
-    elimination(mp, s);
+    elimination(mp, middle_tetris, s);
     GameOver = middle_boundary(mp, middle_tetris);
     next(&fp);
 
