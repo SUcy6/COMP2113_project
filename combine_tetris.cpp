@@ -2,7 +2,7 @@
 using namespace std;
 
 // combine falling tetris and middle tetris to be the new middle tetris
-void combine_tetris ( int ** & middle_tetris, tetris fp, tetris mp )
+void combine_tetris ( int ** & middle_tetris, ftetris ** fp, mtetris &mp )
 {
   int upper_bound, lower_bound, left_bound, right_bound;
 
