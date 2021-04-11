@@ -5,6 +5,7 @@
 #include "tetris.h"
 #include <fstream>
 #include <sstream>
+#include <cstring>
 #include <string>
 
 using namespace std;
@@ -62,7 +63,7 @@ int main()
   // the score field
   score_box = initial_playwin(sheight, swidth, 0, width+5);
   // print content in score box
-  mvprintw(0, width+5+2, "Username: ", "%s", username);
+  mvprintw(0, width+5+2, "Username: %s", username.c_str());
   mvprintw(2, width+5+2, "Best Score: ", "%d", best_score);
   mvprintw(4, width+5+2, "Score: ", "%d", s);
 	
