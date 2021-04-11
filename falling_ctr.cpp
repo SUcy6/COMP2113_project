@@ -10,7 +10,7 @@ void swap(int &a, int &b){
 	b = tmp;
 }
 
-void rotate(tetris * &mp, tetris * &fp)
+void rotate(mtetris &mp, ftetris ** fp)
 {
   int tmp[4][4]={0};
   int tmp_o[4][4]={0};
@@ -91,13 +91,13 @@ void rotate(tetris * &mp, tetris * &fp)
 }
 
 
-void next(tetris * &fp)
+void next(ftetris ** fp)
 {
-  initial_tetris(*fp);
+  initial_tetris(&fp);
   wrefresh(main_win);
 }
 
-void falling(tetris * &fp)
+void falling(ftetris ** fp)
 { 
   if (fp->choice_p == 1) {
     (*fp).y++;
@@ -150,7 +150,7 @@ void falling(tetris * &fp)
   
 }
 
-void move(tetris * &mp, tetris * &fp)
+void move(mtetris &mp, int ** middle_tetris, ftetris ** fp)
 {
   if(check_collision(*mp, *fp) == true){
 	combine_tetris(*mp, *fp);		
@@ -244,7 +244,7 @@ void move(tetris * &mp, tetris * &fp)
 
 }
 
-bool falling_boundary ( ftetris * &p )
+bool falling_boundary ( ftetris ** p )
 {
   for ( int i = 0; i < 4; i++ ) {
     for ( int j = 0; j < 4; j++ ) {
