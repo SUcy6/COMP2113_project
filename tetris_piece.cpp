@@ -105,7 +105,7 @@ void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W)
   	
 }
 
-void initial_tetris(tetris * &fp)
+void initial_tetris(tetris ** fp)
 { 
   // get random shape no. and position no. 
   srand(time(NULL));
