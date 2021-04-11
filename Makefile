@@ -1,4 +1,4 @@
-FLAGS = -pedantic-errors -std=c++11 -I ~/group90/include -I ~/group90/include/ncursestw -L ~/group90/lib -lncursestw -ldl -pthread
+FLAGS = -pedantic-errors -std=c++11 -I ~/group90/include -I ~/group90/include/ncursestw -L ~/group90/lib -lncursestw -ldl -pthread -l ncurses -ObjC++
 
 check_collision.o: check_collision.cpp tetris.h
 	g++ $(FLAGS) -c $< 
