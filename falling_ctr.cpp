@@ -10,7 +10,7 @@ void swap(int &a, int &b){
 	b = tmp;
 }
 
-void rotate(mtetris &mp, ftetris * &fp)
+void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp)
 {
   int tmp[4][4]={0};
   int tmp_o[4][4]={0};
@@ -19,7 +19,7 @@ void rotate(mtetris &mp, ftetris * &fp)
 
   for(int i=0; i<4;i++){
     for(int j=0;j<4;j++) {    
-      tmp_o[i][j] = (mp).shape[i][j];
+      tmp_o[i][j] = middle_tetris[i][j];
     }
   }
   
@@ -27,7 +27,7 @@ void rotate(mtetris &mp, ftetris * &fp)
     // skew symmetry
     for(int i=0; i<4;i++){
       for(int j=0;j<4;j++) {    
-        tmp[j][i] = (mp).shape[i][j];
+        tmp[j][i] = middle_tetris[i][j];
       }
     }
 
@@ -35,7 +35,7 @@ void rotate(mtetris &mp, ftetris * &fp)
     swap((mp).H, (mp).W);
     for(int i=0; i < (mp).H; i++) {
       for(int j=0; j < (mp).W; j++) {
-        (mp).shape[i][(mp).W-1-j] = tmp[i][j];
+        middle_tetris[i][(mp).W-1-j] = tmp[i][j];
       }
     }
   }
@@ -43,7 +43,7 @@ void rotate(mtetris &mp, ftetris * &fp)
     // skew symmetry
     for(int i=0; i<4;i++){
       for(int j=0;j<4;j++) {    
-        tmp[j][i] = (mp).shape[i][j];
+        tmp[j][i] = middle_tetris[i][j];
       }
     }
 
@@ -51,17 +51,17 @@ void rotate(mtetris &mp, ftetris * &fp)
     swap((mp).H, (mp).W);
     for(int i=0; i < (mp).H; i++) {
       for(int j=0; j < (mp).W; j++) {
-        (mp).shape[(mp).H-1-i][j] = tmp[i][j];
+        middle_tetris[(mp).H-1-i][j] = tmp[i][j];
       }
     }
   }
 
-  if(check_collision(mp, *fp)){
+  if(check_collision(mp, &fp)){
 
     // undo rotation
 	for(int i=0; i<4; i++){
 	  for(int j=0; j<4; j++){
-		(mp).shape[i][j]=tmp_o[i][j];
+		  middle_tetris[i][j]=tmp_o[i][j];
       }
 	  (mp).H = tmp_w;
 	  (mp).W = tmp_h;
@@ -81,7 +81,7 @@ void rotate(mtetris &mp, ftetris * &fp)
     // show new #
 	for(int i=0; i<(mp).H; i++){
 		for(int j=0; j<(mp).W; j++){
-			if((mp).shape[i][j]==1){
+			if(middle_tetris[i][j]==1){
 				mvwaddch(main_win, (mp).y+i, (mp).x+j, '#');
 				wrefresh(main_win);
 			}
