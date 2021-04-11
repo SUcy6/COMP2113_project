@@ -10,32 +10,32 @@ void swap(int &a, int &b){
 	b = tmp;
 }
 
-void rotate(mtetris &mp, ftetris ** fp)
+void rotate(mtetris &mp, ftetris * &fp)
 {
   int tmp[4][4]={0};
   int tmp_o[4][4]={0};
-  int tmp_h = (*mp).H;
-  int tmp_w = (*mp).W;
+  int tmp_h = (mp).H;
+  int tmp_w = (mp).W;
 
   for(int i=0; i<4;i++){
     for(int j=0;j<4;j++) {    
-      tmp_o[i][j] = (*mp).shape[i][j];
+      tmp_o[i][j] = (mp).shape[i][j];
     }
   }
   
-  if ((*mp).ctr == 'k') {
+  if ((mp).ctr == 'k') {
     // skew symmetry
     for(int i=0; i<4;i++){
       for(int j=0;j<4;j++) {    
-        tmp[j][i] = (*mp).shape[i][j];
+        tmp[j][i] = (mp).shape[i][j];
       }
     }
 
     // bilateral symmetry
-    swap((*mp).H, (*mp).W);
-    for(int i=0; i < (*mp).H; i++) {
-      for(int j=0; j < (*mp).W; j++) {
-        (*mp).shape[i][(*mp).W-1-j] = tmp[i][j];
+    swap((mp).H, (mp).W);
+    for(int i=0; i < (mp).H; i++) {
+      for(int j=0; j < (mp).W; j++) {
+        (mp).shape[i][(mp).W-1-j] = tmp[i][j];
       }
     }
   }
@@ -43,28 +43,28 @@ void rotate(mtetris &mp, ftetris ** fp)
     // skew symmetry
     for(int i=0; i<4;i++){
       for(int j=0;j<4;j++) {    
-        tmp[j][i] = (*mp).shape[i][j];
+        tmp[j][i] = (mp).shape[i][j];
       }
     }
 
     // bilateral symmetry
-    swap((*mp).H, (*mp).W);
-    for(int i=0; i < (*mp).H; i++) {
-      for(int j=0; j < (*mp).W; j++) {
-        (*mp).shape[(*mp).H-1-i][j] = tmp[i][j];
+    swap((mp).H, (mp).W);
+    for(int i=0; i < (mp).H; i++) {
+      for(int j=0; j < (mp).W; j++) {
+        (mp).shape[(mp).H-1-i][j] = tmp[i][j];
       }
     }
   }
 
-  if(check_collision(*mp, *fp)){
+  if(check_collision(mp, *fp)){
 
     // undo rotation
 	for(int i=0; i<4; i++){
 	  for(int j=0; j<4; j++){
-		(*mp).shape[i][j]=tmp_o[i][j];
+		(mp).shape[i][j]=tmp_o[i][j];
       }
-	  (*mp).H = tmp_w;
-	  (*mp).W = tmp_h;
+	  (mp).H = tmp_w;
+	  (mp).W = tmp_h;
 	}
   }
   else{
@@ -72,17 +72,17 @@ void rotate(mtetris &mp, ftetris ** fp)
 	for(int i=0; i<4; i++){
 		for(int j=0; j<4; j++){
 			if(tmp_o[i][j]==1){
-				mvwaddch(main_win, (*mp).y+i, (*mp).x+j, ' ');
+				mvwaddch(main_win, (mp).y+i, (mp).x+j, ' ');
 				wrefresh(main_win);
 			}
 		}
     }
     
     // show new #
-	for(int i=0; i<(*mp).H; i++){
-		for(int j=0; j<(*mp).W; j++){
-			if((*mp).shape[i][j]==1){
-				mvwaddch(main_win, (*mp).y+i, (*mp).x+j, '#');
+	for(int i=0; i<(mp).H; i++){
+		for(int j=0; j<(mp).W; j++){
+			if((mp).shape[i][j]==1){
+				mvwaddch(main_win, (mp).y+i, (mp).x+j, '#');
 				wrefresh(main_win);
 			}
 		}
