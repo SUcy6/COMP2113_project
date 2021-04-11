@@ -105,14 +105,14 @@ void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W)
   	
 }
 
-void initial_tetris(tetris ** fp)
+void initial_tetris(ftetris ** fp)
 { 
   // get random shape no. and position no. 
   srand(time(NULL));
-  (*fp).choice_s = rand()%7 + 1;
-  (*fp).choice_p = rand()%4 + 1;
+  (*fp)->choice_s = rand()%7 + 1;
+  (*fp)->choice_p = rand()%4 + 1;
   
   // build a tetris piece
-  build_tetris((*fp).choice_s, (*fp).choice_p, (*fp).shape, (*fp).H, (*fp).W);
+  build_tetris((*fp)->choice_s, (*fp)->choice_p, (*fp)->shape, (*fp)->H, (*fp)->W);
 
 }
