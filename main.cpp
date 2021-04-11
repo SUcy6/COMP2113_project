@@ -67,8 +67,8 @@ int main()
   score_box = initial_playwin(sheight, swidth, 0, width+5);
   // print content in score box
   mvprintw(0, width+5+2, "Username: %s", username.c_str());
-  mvprintw(2, width+5+2, "Best Score: ", "%d", best_score);
-  mvprintw(4, width+5+2, "Score: ", "%d", s);
+  mvprintw(2, width+5+2, "Best Score: %d", best_score);
+  mvprintw(4, width+5+2, "Score: %d", s);
 	
   wrefresh(main_win); // update the main playing window
   wrefresh(score_box); // update the score field
@@ -86,6 +86,8 @@ int main()
     middle_tetris[i] = new int [mp.W];
   }
 
+  mvwaddch(main_win, mp.y, mp.x, '#');	
+	
   // initialize falling piece
   ftetris * fp = new ftetris;
   initial_tetris( &fp );
