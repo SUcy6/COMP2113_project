@@ -10,7 +10,7 @@ void swap(int &a, int &b){
 	b = tmp;
 }
 
-void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp)
+void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
 {
   int tmp[4][4]={0};
   int tmp_o[4][4]={0};
@@ -56,7 +56,7 @@ void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp)
     }
   }
 
-  if(check_collision(mp, &fp)){
+  if(check_collision((*fp)->shape, middle_tetris, ){
 
     // undo rotation
 	for(int i=0; i<4; i++){
@@ -91,156 +91,157 @@ void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp)
 }
 
 
-void next(ftetris ** fp)
+void next(ftetris ** fp, WINDOW * main_win)
 {
-  initial_tetris(&fp);
+  initial_tetris(fp);
   wrefresh(main_win);
 }
 
-void falling(ftetris ** fp)
+void falling(ftetris ** fp, WINDOW * main_win)
 { 
-  if (fp->choice_p == 1) {
-    (*fp).y++;
-    for(int i = (*fp).H-1; i >= 0; i--){
-	  for(int j = 0; j < (*fp).W; j++){
-		if((*fp).shape[i][j] == 1){
-		  mvwaddch(main_win, (*fp).y+i-1, (*fp).x+j, ' ');
-		  mvwaddch(main_win, (*fp).y+i, (*fp).x+j, '#');
+  if ((*fp)->choice_p == 1) {
+    (*fp)->y++;
+    for(int i = (*fp)->H-1; i >= 0; i--){
+	  for(int j = 0; j < (*fp)->W; j++){
+		if((*fp)->shape[i][j] == 1){
+		  mvwaddch(main_win, (*fp)->y+i-1, (*fp)->x+j, ' ');
+		  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
 		}
 	  }
     }
   }
-  else if (fp->choice_p == 2) {
-    (*fp).y--;
-      for(int i = 0; i < (*fp).W; i++){
-		for(int j = 0; j < (*fp).W; j++){
-			if((*fp).shape[i][j] == 1){
-			  mvwaddch(main_win, (*fp).y+i+1, (*fp).x+j, ' ');
-			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j, '#');
+  else if ((*fp)->choice_p == 2) {
+    (*fp)->y--;
+      for(int i = 0; i < (*fp)->H; i++){
+		for(int j = 0; j < (*fp)->W; j++){
+			if((*fp)->shape[i][j] == 1){
+			  mvwaddch(main_win, (*fp)->y+i+1, (*fp)->x+j, ' ');
+			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
 			}
 		}
       }
   }
-  else if (fp->choice_p == 3) {
-    (*fp).x++;
-	  for(int i=0; i < (*fp).H; i++){
-		for(int j=(*fp).W-1; j >= 0; j--){
-			if((*fp).shape[i][j] == 1){
-			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j-1, ' ');
-			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j, '#');
+  else if ((*fp)->choice_p == 3) {
+    (*fp)->x++;
+	  for(int i=0; i < (*fp)->H; i++){
+		for(int j=(*fp)->W-1; j >= 0; j--){
+			if((*fp)->shape[i][j] == 1){
+			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j-1, ' ');
+			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
 			}
 		}
       }     
   }
-  else if (fp->choice_p == 4) {
-    (*fp).x--;
-	  for(int i=0; i < (*fp).H; i++){
-		for(int j=0; j < (*fp).W; j++){
-			if((*fp).shape[i][j] == 1){
-			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j+1, ' ');
-			  mvwaddch(main_win, (*fp).y+i, (*fp).x+j, '#');
+  else if ((*fp)->choice_p == 4) {
+    (*fp)->x--;
+	  for(int i=0; i < (*fp)->H; i++){
+		for(int j=0; j < (*fp)->W; j++){
+			if((*fp)->shape[i][j] == 1){
+			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j+1, ' ');
+			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
 			}
 		}
       }  
   }
-  
+
   if (falling_boundary ( fp )) {
     initial_tetris(fp);
   }
   
 }
 
-void move(mtetris &mp, int ** middle_tetris, ftetris ** fp)
+void move(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
 {
-  if(check_collision(*mp, *fp) == true){
-	combine_tetris(*mp, *fp);		
-    next(*fp);
+  if(check_collision(mp, &fp) == true){
+	  combine_tetris(middle_tetris, fp, mp);		
+    next(fp, main_win);
   }
   else{
     // free fall
-    falling(*fp);
+    falling(fp, main_win);
   }
   wrefresh(main_win);
   
-  if((*mp).ctr == 'a'){
-	if(check_collision(*mp, *fp) == false){
-      (*mp).x--;
-	  for(int i=0; i < (*mp).H; i++){
-		for(int j=0; j < (*mp).W; j++){
-			if((*mp).shape[i][j] == 1){
-			  mvwaddch(main_win, (*mp).y+i, (*mp).x+j+1, ' ');
-			  mvwaddch(main_win, (*mp).y+i, (*mp).x+j, '#');
+  if(mp.ctr == 'a'){
+	if(check_collision(mp, &fp) == false){
+      (mp).x--;
+	  for(int i=0; i < (mp).H; i++){
+		for(int j=0; j < (mp).W; j++){
+			if(middle_tetris[i][j] == 1){
+			  mvwaddch(main_win, (mp).y+i, (mp).x+j+1, ' ');
+			  mvwaddch(main_win, (mp).y+i, (mp).x+j, '#');
 			}
 		}
       } 
 	}
     else {
-        combine_tetris(*mp, *fp);
-        next(*fp);
+        combine_tetris( middle_tetris, fp, mp);
+        next(fp, main_win);
     }
     wrefresh(main_win);
   }
   
-  else if((*mp).ctr == 'd'){
-	if(check_collision(*mp, *fp) == false){
-      (*mp).x++;
-	  for(int i=0; i < (*mp).H; i++){
-		for(int j=(*mp).W-1; j >= 0; j--){
-			if((*mp).shape[i][j] == 1){
-			  mvwaddch(main_win, (*mp).y+i, (*mp).x+j-1, ' ');
-			  mvwaddch(main_win, (*mp).y+i, (*mp).x+j, '#');
+  else if(mp.ctr == 'd'){
+	if(check_collision(mp, *fp) == false){
+      (mp).x++;
+	  for(int i=0; i < (mp).H; i++){
+		for(int j=(mp).W-1; j >= 0; j--){
+			if(middle_tetris[i][j] == 1){
+			  mvwaddch(main_win, (mp).y+i, (mp).x+j-1, ' ');
+			  mvwaddch(main_win, (mp).y+i, (mp).x+j, '#');
 			}
 		}
       }  
 	}
     else {
-        combine_tetris(*mp, *fp);
-        next(*fp);
+        combine_tetris(middle_tetris, fp, mp);
+        next(fp, main_win);
     }
     wrefresh(main_win);
   }
 
-  else if((*mp).ctr == 's'){
-	if(check_collision(*mp, *fp) == true){
-	  combine_tetris(*mp, *fp);	
-          next(*fp);	
+  else if(mp.ctr == 's'){
+	if(check_collision(mp, *fp) == true){
+	  combine_tetris(middle_tetris, fp, mp);	
+      next(fp, main_win);	
 	}
-      else{
-        (*mp).y++;
-        for(int i = (*mp).H-1; i >= 0; i--){
-	  for(int j = 0; j < (*mp).W; j++){
-			if((*mp).shape[i][j] == 1){
-			  mvwaddch(main_win, (*mp).y+i-1, (*mp).x+j, ' ');
-			  mvwaddch(main_win, (*mp).y+i, (*mp).x+j, '#');
+	else{
+      mp.y++;
+      for(int i = (mp).H-1; i >= 0; i--){
+		for(int j = 0; j < (mp).W; j++){
+			if(middle_tetris[i][j] == 1){
+			  mvwaddch(main_win, (mp).y+i-1, (mp).x+j, ' ');
+			  mvwaddch(main_win, (mp).y+i, (mp).x+j, '#');
 			}
 		}
-        }
       }
+	}
     wrefresh(main_win);
   }
 
-  else if((*mp).ctr == 'w'){
-	if(check_collision(*mp, *fp) == true){
-	  combine_tetris(*mp, *fp);	
-      next(*fp);	
+  else if(mp.ctr == 'w'){
+	if(check_collision(mp, *fp) == true){
+	  combine_tetris(middle_tetris, fp, mp);	
+      next(fp, main_win);	
 	}
 	else{
-      (*mp).y--;
-      for(int i = 0; i < (*mp).W; i++){
-		for(int j = 0; j < (*mp).W; j++){
-			if((*mp).shape[i][j] == 1){
-			  mvwaddch(main_win, (*mp).y+i+1, (*mp).x+j, ' ');
-			  mvwaddch(main_win, (*mp).y+i, (*mp).x+j, '#');
+      mp.y--;
+      for(int i = 0; i < (mp).W; i++){
+		for(int j = 0; j < (mp).W; j++){
+			if(middle_tetris[i][j] == 1){
+			  mvwaddch(main_win, (mp).y+i+1, (mp).x+j, ' ');
+			  mvwaddch(main_win, (mp).y+i, (mp).x+j, '#');
 			}
 		}
       }
-      }
+	}
     wrefresh(main_win);
   }
   
-  else if ((*mp).ctr == 'j' || (*mp).ctr == 'k'){
-      rotate(*mp, *fp);
+  else if (mp.ctr == 'j' || mp.ctr == 'k'){
+      rotate(mp, middle_tetris, fp, main_win);
   }
+  
 
 }
 
@@ -248,7 +249,7 @@ bool falling_boundary ( ftetris ** p )
 {
   for ( int i = 0; i < 4; i++ ) {
     for ( int j = 0; j < 4; j++ ) {
-      if ( p.shape[i][j] == 1 && ( p.x + i == 0 || p.x + i > 30 || p.y + j == 0 || p.y + j > 60 )) {
+      if ( (*p)->shape[i][j] == 1 && ( (*p)->x + i == 0 || (*p)->x + i > 30 || (*p)->y + j == 0 || (*p)->y + j > 60 )) {
         return 1;
       }
     }
