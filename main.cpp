@@ -85,7 +85,7 @@ int main()
 
   // initialize falling piece
   ftetris * fp = new ftetris;
-  initial_tetris( *fp );
+  initial_tetris( &fp );
 
   char cmd = getch();
   while(cmd != 'q'){
@@ -95,11 +95,11 @@ int main()
     (mp).ctr = getch();
     cmd = (mp).ctr;
 
-    move(mp, *fp); // move mp & fall fp
+    move(mp, middle_tetris, &fp); // move mp & fall fp
     sleep(1);
     elimination(mp, s);
     GameOver = middle_boundary(mp, middle_tetris);
-    next(*fp);
+    next(&fp);
 
     if(GameOver){
 	  break;
