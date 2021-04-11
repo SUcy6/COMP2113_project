@@ -65,13 +65,13 @@ void elimination(mtetris  &mp, int **  middle_tetris, int &s); // check whether 
 
 
 // falling_ctr.cpp 
-void move(mtetris  &mp, int ** middle_tetris, ftetris ** fp); // move middle piece & fall tetris
+void move(mtetris  &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win); // move middle piece & fall tetris
 
-void rotate(mtetris  &mp, ftetris * &fp); // rotate middle piece
+void rotate(mtetris  &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win); // rotate middle piece
 
-void next(ftetris ** fp); // set next tetris
+void next(ftetris ** fp, WINDOW * main_win); // set next tetris
 
-void falling(ftetris * &fp); // control tetris falling
+void falling(ftetris * &fp, WINDOW * main_win); // control tetris falling
 
 bool falling_boundary ( ftetris * &p );
 
@@ -83,7 +83,7 @@ bool check_collision ( mtetris  &mp, ftetris * &fp );  // check_collision
 
 
 // combine_tetris.cpp
-void combine_tetris ( int ** & middle_tetris, mtetris  &mp, ftetris ** fp ); // combine collide pieces
+void combine_tetris ( int **  middle_tetris, ftetris ** fp, mtetris  &mp ); // combine collide pieces
 
 // update_record.cpp 
 void update_record ( int new_score, std::string new_username ); // update record
