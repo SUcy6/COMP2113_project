@@ -6,10 +6,10 @@ void combine_tetris ( int ** & middle_tetris, ftetris ** fp, mtetris &mp )
 {
   int upper_bound, lower_bound, left_bound, right_bound;
 
-  upper_bound = min (fp.y, mp.y);
-  lower_bound = max (fp.y + fp.H - 1, mp.y + mp.H - 1);
-  left_bound = min (fp.x, mp.x);
-  right_bound = max (fp.x + fp.W - 1, mp.x + mp.W - 1);
+  upper_bound = min ((*fp)->y, mp.y);
+  lower_bound = max ((*fp)->y + (*fp)->H - 1, mp.y + mp.H - 1);
+  left_bound = min ((*fp)->x, mp.x);
+  right_bound = max ((*fp)->x + (*fp)->W - 1, mp.x + mp.W - 1);
 
   // combined_tetris declaration
   int ** combined_tetris = new int * [lower_bound - upper_bound + 1];
@@ -20,8 +20,8 @@ void combine_tetris ( int ** & middle_tetris, ftetris ** fp, mtetris &mp )
   // combined_tetris initialization
  for (int i = 0; i < 4; i++) {
    for (int j = 0; j < 4; j++) {
-     if (fp.shape[i][j] == 1) {
-       combined_tetris[i - upper_bound + fp.y][j - left_bound + fp.x] = 1;
+     if ((*fp)->shape[i][j] == 1) {
+       combined_tetris[i - upper_bound + (*fp)->y][j - left_bound + (*fp)->x] = 1;
      }
    }
  }
@@ -29,7 +29,7 @@ void combine_tetris ( int ** & middle_tetris, ftetris ** fp, mtetris &mp )
  for (int i = 0; i < mp.H; i++) {
    for (int j = 0; j < mp.W; j++) {
      if (middle_tetris[i][j] == 1) {
-       combined_tetris[i - upper_bound + mp.y]][j - left_bound + mp.x] = 1;
+       combined_tetris[i - upper_bound + mp.y][j - left_bound + mp.x] = 1;
      }
    }
  }
