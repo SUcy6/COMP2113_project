@@ -56,6 +56,9 @@ int main()
 
   refresh();    // display virtual window
 
+  // required windows
+  WINDOW * main_win, *score_box;
+	
   // the main playing window
   main_win = initial_playwin(height, width, 0, 0);
   build_boundary(field);
