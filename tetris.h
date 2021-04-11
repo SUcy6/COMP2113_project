@@ -73,7 +73,7 @@ void next(ftetris ** fp, WINDOW * main_win); // set next tetris
 
 void falling(ftetris * &fp, WINDOW * main_win); // control tetris falling
 
-bool falling_boundary ( ftetris * &p );
+bool falling_boundary ( ftetris ** p );
 
 bool middle_boundary ( mtetris p, int ** middle_tetris );
 
