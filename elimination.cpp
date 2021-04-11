@@ -85,8 +85,8 @@ void elimination ( mtetris & mp, int ** & middle_tetris, int & score )
 
   // elimination
   for ( int i = 0; i < eliminations.size(); i++ ) {
-    for ( int x = eliminations[i].x; x < eliminations[i].x + eliminations[i].size(); x++ ) {
-      for ( int y = eliminations[i].y; y < eliminations[i].y + eliminations[i].size(); y++ ) {
+    for ( int x = eliminations[i].x; x < eliminations[i].x + eliminations[i].side; x++ ) {
+      for ( int y = eliminations[i].y; y < eliminations[i].y + eliminations[i].side; y++ ) {
         middle_tetris [x][y] = 0;
         score += 10;
       }
