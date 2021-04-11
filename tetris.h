@@ -50,7 +50,7 @@ class mtetris
 };
 
 // tetris_piece.cpp
-void initial_tetris(ftetris * &fp);  // initialize tetris piece
+void initial_tetris(ftetris ** fp);  // initialize tetris piece
 
 void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W);  // build tetris
 
@@ -66,11 +66,11 @@ void elimination(mtetris &mp, int &s); // check whether a 3x3 matrix is formed &
 
 
 // falling_ctr.cpp 
-void move(mtetris  &mp, ftetris * &fp); // move middle piece & fall tetris
+void move(mtetris  &mp, int ** middle_tetris, ftetris ** fp); // move middle piece & fall tetris
 
 void rotate(mtetris  &mp, ftetris * &fp); // rotate middle piece
 
-void next(ftetris * &fp); // set next tetris
+void next(ftetris ** fp); // set next tetris
 
 void falling(ftetris * &fp); // control tetris falling
 
