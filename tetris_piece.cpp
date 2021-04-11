@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W)
+void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W, int &x, int &y)
 { 
   // build a 4x4 empty matrix to initialize a tetris piece
   for(int i = 0;i < 4; i++){
@@ -113,6 +113,6 @@ void initial_tetris(ftetris ** fp)
   (*fp)->choice_p = rand()%4 + 1;
   
   // build a tetris piece
-  build_tetris((*fp)->choice_s, (*fp)->choice_p, (*fp)->shape, (*fp)->H, (*fp)->W);
+  build_tetris((*fp)->choice_s, (*fp)->choice_p, (*fp)->shape, (*fp)->H, (*fp)->W, (*fp)->x, (*fp)->y);
 
 }
