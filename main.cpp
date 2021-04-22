@@ -97,6 +97,7 @@ int main()
   }
   
   mvwaddch(main_win, height/2, width/2, '#');
+  middle_tetris[0][0] = 1;
   wrefresh(main_win);
 
   // initialize falling piece
