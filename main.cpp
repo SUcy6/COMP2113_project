@@ -96,7 +96,7 @@ int main()
     middle_tetris[i] = new int [mp.W];
   }
   
-  mvwaddch(main_win, height/2, width/2, '#');
+  mvwaddch(main_win, mp.y, mp.x, '#');
   middle_tetris[0][0] = 1;
   wrefresh(main_win);
 
@@ -125,38 +125,38 @@ int main()
       if (falling_boundary ( fp )) {
         for(int i=0; i < (fp)->H; i++){
           for(int j=0; j < (fp)->W; j++){
-	    if((fp)->shape[i][j] == 1 && (fp)->y+i != 0 && (fp)->x+j != 0 && (fp)->y+i <= 30 && (fp)->x+j != 61){
-	      mvwaddch(main_win, (fp)->y+i, (fp)->x+j, ' ');
-	    }
+            if((fp)->shape[i][j] == 1 && (fp)->y+i != 0 && (fp)->x+j != 0 && (fp)->y+i <= 30 && (fp)->x+j != 61){
+              mvwaddch(main_win, (fp)->y+i, (fp)->x+j, ' ');
+            }
           }
         }  
         initial_tetris(fp);
       } 
 
       if(check_collision(fp, mp, middle_tetris) == true){
-	combine_tetris(middle_tetris, fp, mp);	
+        combine_tetris(middle_tetris, fp, mp);	
         next(fp, main_win);	
       }
 
       refresh();
     }
-	      
-      if (FD_ISSET(0, &readfd)) {
-        cmd = getch();
-        if (cmd == 'q') {
-        break;
-        }
-    
-        mp.ctr = cmd;
-        move(mp, middle_tetris, fp, main_win); // move mp & fall fp
-        elimination(mp, middle_tetris, s);
-        GameOver = middle_boundary(mp, middle_tetris);
-        next(fp);
-      }
+        
+    if (FD_ISSET(0, &readfd)) {
+      cmd = getch();
 
-      if(GameOver){
-	break;
+      if (cmd == 'q') {
+      break;
       }
+    
+      mp.ctr = cmd;
+      move(mp, middle_tetris, fp, main_win); // move mp 
+      elimination(mp, middle_tetris, s);
+      GameOver = middle_boundary(mp, middle_tetris);
+    }
+
+    if(GameOver){
+      break;
+    }
 
     // initialize ctr to an invalid value each time
     (mp).ctr = 'i';
