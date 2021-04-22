@@ -5,14 +5,14 @@
 
 // the playing field
 const int height(32), width(62);
-int field[height][width];
+//int field[height][width];
 
 // the score field
 const int sheight(15), swidth(30);
 
 // game status
-bool GameOver = false;
-int s(0); //score
+//bool GameOver = false;
+//int s(0); //score
 
 // falling tetrominoes
 class ftetris
@@ -49,7 +49,7 @@ class mtetris
 };
 
 // tetris_piece.cpp
-void initial_tetris(ftetris ** fp);  // initialize tetris piece
+void initial_tetris(ftetris * & fp);  // initialize tetris piece
 
 void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W, int &x, int &y);  // build tetris
 
@@ -65,25 +65,25 @@ void elimination(mtetris  &mp, int **  middle_tetris, int &s); // check whether 
 
 
 // falling_ctr.cpp 
-void move(mtetris  &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win); // move middle piece & fall tetris
+void move(mtetris  &mp, int ** middle_tetris, ftetris *& fp, WINDOW * main_win); // move middle piece & fall tetris
 
-void rotate(mtetris  &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win); // rotate middle piece
+void rotate(mtetris  &mp, int ** middle_tetris, ftetris *& fp, WINDOW * main_win); // rotate middle piece
 
-void next(ftetris ** fp, WINDOW * main_win); // set next tetris
+void next(ftetris *& fp, WINDOW * main_win); // set next tetris
 
-void falling(ftetris * &fp, WINDOW * main_win); // control tetris falling
+void falling(ftetris *& fp, WINDOW * main_win); // control tetris falling
 
-bool falling_boundary ( ftetris ** p );
+bool falling_boundary ( ftetris *& p );
 
 bool middle_boundary ( mtetris p, int ** middle_tetris );
 
 
 // check_collision.cpp
-bool check_collision ( mtetris  &mp, ftetris * &fp );  // check_collision 
+bool check_collision ( ftetris *& fp, mtetris  &mp, int ** middle_tetris); //int orientation ); // check_collision 
 
 
 // combine_tetris.cpp
-void combine_tetris ( int **  middle_tetris, ftetris ** fp, mtetris  &mp ); // combine collide pieces
+void combine_tetris ( int **  middle_tetris, ftetris *& fp, mtetris  &mp ); // combine collide pieces
 
 // update_record.cpp 
 void update_record ( int new_score, std::string new_username ); // update record
