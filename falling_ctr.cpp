@@ -10,7 +10,7 @@ void swap(int &a, int &b){
 	b = tmp;
 }
 
-void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
+void rotate(mtetris &mp, int ** middle_tetris, ftetris *& fp, WINDOW * main_win)
 {
   int tmp[4][4]={0};
   int tmp_o[4][4]={0};
@@ -56,7 +56,7 @@ void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
     }
   }
 
-  if(check_collision((*fp)->shape, middle_tetris, ){
+  if(check_collision(fp, mp, middle_tetris)){
 
     // undo rotation
 	for(int i=0; i<4; i++){
@@ -76,7 +76,7 @@ void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
 				wrefresh(main_win);
 			}
 		}
-    }
+  }
     
     // show new #
 	for(int i=0; i<(mp).H; i++){
@@ -91,68 +91,66 @@ void rotate(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
 }
 
 
-void next(ftetris ** fp, WINDOW * main_win)
+void next(ftetris *& fp, WINDOW * main_win)
 {
   initial_tetris(fp);
   wrefresh(main_win);
 }
 
-void falling(ftetris ** fp, WINDOW * main_win)
+void falling(ftetris *& fp, WINDOW * main_win)
 { 
-  if ((*fp)->choice_p == 1) {
-    (*fp)->y++;
-    for(int i = (*fp)->H-1; i >= 0; i--){
-	  for(int j = 0; j < (*fp)->W; j++){
-		if((*fp)->shape[i][j] == 1){
-		  mvwaddch(main_win, (*fp)->y+i-1, (*fp)->x+j, ' ');
-		  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
-		}
+  if ((fp)->choice_p == 1) {
+    (fp)->y++;
+    for(int i = fp->H-1; i >= 0; i--){
+	for(int j = 0; j < (fp)->W; j++){
+	  if((fp)->shape[i][j] == 1){
+	    mvwaddch(main_win, (fp)->y+i-1, (fp)->x+j, ' ');
+            mvwaddch(main_win, (fp)->y+i, (fp)->x+j, '#');
 	  }
+	}
     }
   }
-  else if ((*fp)->choice_p == 2) {
-    (*fp)->y--;
-      for(int i = 0; i < (*fp)->H; i++){
-		for(int j = 0; j < (*fp)->W; j++){
-			if((*fp)->shape[i][j] == 1){
-			  mvwaddch(main_win, (*fp)->y+i+1, (*fp)->x+j, ' ');
-			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
-			}
-		}
-      }
+  else if ((fp)->choice_p == 2) {
+    (fp)->y--;
+    for(int i = 0; i < (fp)->H; i++){
+		  for(int j = 0; j < (fp)->W; j++){
+			  if((fp)->shape[i][j] == 1){
+			    mvwaddch(main_win, (fp)->y+i+1, (fp)->x+j, ' ');
+			    mvwaddch(main_win, (fp)->y+i, (fp)->x+j, '#');
+			  }
+		  }
+    }
   }
-  else if ((*fp)->choice_p == 3) {
-    (*fp)->x++;
-	  for(int i=0; i < (*fp)->H; i++){
-		for(int j=(*fp)->W-1; j >= 0; j--){
-			if((*fp)->shape[i][j] == 1){
-			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j-1, ' ');
-			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
-			}
-		}
-      }     
+  else if ((fp)->choice_p == 3) {
+    (fp)->x++;
+	  for(int i=0; i < (fp)->H; i++){
+		  for(int j=(fp)->W-1; j >= 0; j--){
+			  if((fp)->shape[i][j] == 1){
+			    mvwaddch(main_win, (fp)->y+i, (fp)->x+j-1, ' ');
+			    mvwaddch(main_win, (fp)->y+i, (fp)->x+j, '#');
+			  }
+		  }
+    }     
   }
-  else if ((*fp)->choice_p == 4) {
-    (*fp)->x--;
-	  for(int i=0; i < (*fp)->H; i++){
-		for(int j=0; j < (*fp)->W; j++){
-			if((*fp)->shape[i][j] == 1){
-			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j+1, ' ');
-			  mvwaddch(main_win, (*fp)->y+i, (*fp)->x+j, '#');
-			}
-		}
-      }  
-  }
-
-  if (falling_boundary ( fp )) {
-    initial_tetris(fp);
+  else if ((fp)->choice_p == 4) {
+    (fp)->x--;
+	  for(int i=0; i < (fp)->H; i++){
+		  for(int j=0; j < (fp)->W; j++){
+			  if((fp)->shape[i][j] == 1){
+			    mvwaddch(main_win, (fp)->y+i, (fp)->x+j+1, ' ');
+			    mvwaddch(main_win, (fp)->y+i, (fp)->x+j, '#');
+			  }
+		  }
+    }  
   }
   
+  wrefresh(main_win);
+
 }
 
-void move(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
+void move(mtetris &mp, int ** middle_tetris, ftetris *& fp, WINDOW * main_win)
 {
-  if(check_collision(mp, &fp) == true){
+  if(check_collision(fp, mp, middle_tetris) == true){
 	  combine_tetris(middle_tetris, fp, mp);		
     next(fp, main_win);
   }
@@ -163,7 +161,7 @@ void move(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
   wrefresh(main_win);
   
   if(mp.ctr == 'a'){
-	if(check_collision(mp, &fp) == false){
+	if(check_collision(fp, mp, middle_tetris) == false){
       (mp).x--;
 	  for(int i=0; i < (mp).H; i++){
 		for(int j=0; j < (mp).W; j++){
@@ -182,7 +180,7 @@ void move(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
   }
   
   else if(mp.ctr == 'd'){
-	if(check_collision(mp, *fp) == false){
+	if(check_collision(fp, mp, middle_tetris) == false){
       (mp).x++;
 	  for(int i=0; i < (mp).H; i++){
 		for(int j=(mp).W-1; j >= 0; j--){
@@ -201,7 +199,7 @@ void move(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
   }
 
   else if(mp.ctr == 's'){
-	if(check_collision(mp, *fp) == true){
+	if(check_collision(fp, mp, middle_tetris) == true){
 	  combine_tetris(middle_tetris, fp, mp);	
       next(fp, main_win);	
 	}
@@ -220,7 +218,7 @@ void move(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
   }
 
   else if(mp.ctr == 'w'){
-	if(check_collision(mp, *fp) == true){
+	if(check_collision(fp, mp, middle_tetris) == true){
 	  combine_tetris(middle_tetris, fp, mp);	
       next(fp, main_win);	
 	}
@@ -245,15 +243,47 @@ void move(mtetris &mp, int ** middle_tetris, ftetris ** fp, WINDOW * main_win)
 
 }
 
-bool falling_boundary ( ftetris ** p )
-{
-  for ( int i = 0; i < 4; i++ ) {
-    for ( int j = 0; j < 4; j++ ) {
-      if ( (*p)->shape[i][j] == 1 && ( (*p)->x + i == 0 || (*p)->x + i > 30 || (*p)->y + j == 0 || (*p)->y + j > 60 )) {
-        return 1;
+bool falling_boundary ( ftetris *& p )
+{ 
+  bool r;
+  switch(p->choice_p){
+    case 1:
+      if ( (p)->y + p->H > 30 ) {
+        r = 1;
       }
-    }
+      else{
+        r=0;
+      }
+      break;
+    
+    case 2:
+      if ( (p)->y == 0 ) {
+        r = 1;
+      }
+      else{
+        r=0;
+      }
+      break;
+    
+    case 3:
+      if ( (p)->x + p->W > 60 ) {
+        r = 1;
+      }
+      else{
+        r=0;
+      }
+      break;
+
+    case 4:
+      if (p->x == 0 ) {
+        r = 1;
+      }
+      else{
+        r=0;
+      }
+      break;
   }
+  return r;
 }
 
 bool middle_boundary ( mtetris p, int ** middle_tetris ) 
@@ -265,4 +295,5 @@ bool middle_boundary ( mtetris p, int ** middle_tetris )
       }
     }
   }
+  return 0;
 }
