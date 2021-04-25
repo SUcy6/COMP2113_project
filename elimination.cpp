@@ -105,7 +105,7 @@ void elimination ( mtetris & mp, int ** middle_tetris, int & score, WINDOW * mai
     left_bound = mp.x + mp.W - 1;
     right_bound = mp.x;
 
-    // update mtetris mp
+    // new boundaries
     for (int i = 0; i < mp.H; i++) {
       for (int j = 0; j < mp.W; j++) {
         if (middle_tetris[i][j] == 1) {
@@ -125,33 +125,61 @@ void elimination ( mtetris & mp, int ** middle_tetris, int & score, WINDOW * mai
       }
     }
 
-    // store new mp information
-    int temp_x = left_bound;
-    int temp_y = upper_bound;
-    int temp_W = right_bound - left_bound + 1;
-    int temp_H = lower_bound - upper_bound + 1;
+    // not empty
+    if (upper_bound <= lower_bound && left_bound <= right_bound) {
+      // store new mp information
+      int temp_x = left_bound;
+      int temp_y = upper_bound;
+      int temp_W = right_bound - left_bound + 1;
+      int temp_H = lower_bound - upper_bound + 1;
 
-    // new_tetris declaration
-    int ** eliminated_tetris = new int * [temp_H];
-    for (int i = 0; i < temp_H; i++) {
-      eliminated_tetris[i] = new int[temp_W];
-    }
-
-    // new_tetris initialization
-    for (int i = 0; i < temp_H; i++) {
-      for (int j = 0; j < temp_W; j++) {
-        //cout << i << ' ' << j << ' ' << i + temp_y - mp.y << ' ' << j + temp_x - mp.x << endl;
-        //cout << new_tetris[i][j] << ' ' << middle_tetris[i + temp_y - mp.y][j + temp_x - mp.x] << endl;
-        eliminated_tetris[i][j] = middle_tetris[i + temp_y - mp.y][j + temp_x - mp.x];
+      // new_tetris declaration
+      int ** eliminated_tetris = new int * [temp_H];
+      for (int i = 0; i < temp_H; i++) {
+        eliminated_tetris[i] = new int[temp_W];
       }
+
+      // new_tetris initialization
+      for (int i = 0; i < temp_H; i++) {
+        for (int j = 0; j < temp_W; j++) {
+          eliminated_tetris[i][j] = middle_tetris[i + temp_y - mp.y][j + temp_x - mp.x];
+        }
+      }
+
+      middle_tetris = eliminated_tetris;
+
+      // update new mp info
+      mp.x = temp_x;
+      mp.y = temp_y;
+      mp.H = temp_H;
+      mp.W = temp_W;
     }
+    // empty
+    else {
+      // 1x1 tetris
+      int temp_x = 30;
+      int temp_y = 15;
+      int temp_W = 1;
+      int temp_H = 1;
 
-    middle_tetris = eliminated_tetris;
+      // new_tetris declaration
+      int ** eliminated_tetris = new int * [temp_H];
+      for (int i = 0; i < temp_H; i++) {
+        eliminated_tetris[i] = new int[temp_W];
+      }
 
-    // update new mp info
-    mp.x = temp_x;
-    mp.y = temp_y;
-    mp.H = temp_H;
-    mp.W = temp_W;
+      eliminated_tetris[0][0] = 1;
+
+      mvwaddch(main_win, temp_x, temp_y, '#');
+      wrefresh(main_win);
+
+      middle_tetris = eliminated_tetris;
+
+      // update new mp info
+      mp.x = temp_x;
+      mp.y = temp_y;
+      mp.H = temp_H;
+      mp.W = temp_W;
+    }
   }
 }
