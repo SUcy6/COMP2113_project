@@ -34,12 +34,13 @@ E.g. ####         #***       #
 > If someone does not care about the game score, he/she can play it as dodgeball. Just move the central piece to avoid catching falling pieces. No ending but no scores.:joy::sunglasses::joy: 
 ## List of features:
 1. Information of tetrominoes is stored in a 2D `array` with element 0 or 1. Element in the x-th row and y-th column represents a point in game interface with coordinates (x, y), with 0 meaning no tiles and 1 meaning a unit of tile.
-2. `Data structure` such as `class` will be used to create types that describe properteis of tetrominoes, including shape and orientation.
-3. `Dynamic memory` is used to store the tetromino information in the middle tetris as well as the surrounding area. Memory will be released once the user quits the game.
-4. Newly-generated tetrominoes random in position are achieved by random numbers that represent x, y coordinates of the tiles. Random shapes and orientations of tiles are also generated through `random` numbers, each representing one type of tetromino.
-5. `File input and output` are used to save the game record for old users to continue the game.
-6. `Multiple files` are used for codes regarding different processes, such as creating the grid, reading the input, random tetrominoes generator, score calculator, etc.
-7. The steady falling of tetrominoes are achieved by refresh the main window in each loop.
+2. `STL containers` are used to facilitate manipulations of tetris such as elimination.
+3. `Data structure` such as `class` will be used to create types that describe properteis of tetrominoes, including shape and orientation.
+4. `Dynamic memory` is used to store the tetromino information in the middle tetris as well as the surrounding area. Memory will be released once the user quits the game.
+5. Newly-generated tetrominoes random in position are achieved by random numbers that represent x, y coordinates of the tiles. Random shapes and orientations of tiles are also generated through `random` numbers, each representing one type of tetromino.
+6. `File input and output` are used to save the game record for old users to continue the game.
+7. `Multiple files` are used for codes regarding different processes, such as creating the grid, reading the input, random tetrominoes generator, score calculator, etc.
+8. The steady falling of tetrominoes are achieved by refresh the main window in each loop, thus creating an interactive game style.
 ## List of non-standard libraries:
 NCURSES
 ## Compilation and execution instructions:
@@ -51,3 +52,5 @@ NCURSES
 3. Type `./main`.
 4. Follow the instruction on the screen. Choose `1` for new user and `2` for old user. Enter your username.
 5. Enjoy the game. 
+## Video: 
+https://drive.google.com/file/d/1xtwLgqEd8dDXyVX-Ntm3INM62tVAMHis/view?usp=sharing
