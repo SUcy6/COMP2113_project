@@ -2,8 +2,8 @@
 #include <ncurses.h>
 #include <stdlib.h> // for calling system()
 #include <unistd.h> // for calling sleep()
-#include <cstdlib>      
-#include <ctime>        
+#include <cstdlib>
+#include <ctime>
 #include "tetris.h"
 #include <fstream>
 #include <sstream>
@@ -26,6 +26,7 @@ int main()
   cin >> choice;
 
   while (choice != 1 && choice != 2){
+    cout << "1: New User 2: Use an Existing Username" << endl;
     cout << "Please input a valid choice: ";
     cin >> choice;
   }
@@ -35,8 +36,57 @@ int main()
 
   // new user
   if ( choice == 1 ) {
+
+    bool isUsed = 0;
+
+    // check if username exists
+    ifstream fin;
+    string record;
+    fin.open ("gamerecord.txt");
+    isUsed = 0;
+
+    while (getline (fin, record)) {
+      string usr;
+      int scr;
+      istringstream iss(record);
+      iss >> usr >> scr;
+      if (username == usr) {
+        isUsed = 1;
+        break;
+      }
+    }
+
+    // name is used
+    while (isUsed == 1) {
+
+      // re-enter a name
+      cout << "Username existed. Please input a new username: ";
+      cin >> username;
+      isUsed = 0;
+
+      // check if username exists
+      ifstream fin;
+      string record;
+      fin.open ("gamerecord.txt");
+      isUsed = 0;
+
+      while (getline (fin, record)) {
+        string usr;
+        int scr;
+        istringstream iss(record);
+        iss >> usr >> scr;
+        if (username == usr) {
+          isUsed = 1;
+          break;
+        }
+      }
+
+      fin.close();
+    }
+
     best_score = 0;
   }
+
   // old user
   else {
     ifstream fin;
@@ -173,7 +223,7 @@ int main()
       refresh();
       GameOver = middle_boundary (mp, middle_tetris);
     }
-    
+
     if(GameOver){
       break;
     }
