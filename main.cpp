@@ -18,17 +18,23 @@ int main()
 {
   // choose game mode and read game record
   string username;
-  int best_score;
+  int best_score(0);
   int choice;
 
   cout << "1: New User 2: Use an Existing Username" << endl;
   cout << "Please input your choice: ";
   cin >> choice;
+
+  while (choice != 1 && choice != 2){
+    cout << "Please input a valid choice: ";
+    cin >> choice;
+  }
+
   cout << "Please input your username: ";
   cin >> username;
 
   // new user
-  if ( choice == '1' ) {
+  if ( choice == 1 ) {
     best_score = 0;
   }
   // old user
@@ -66,10 +72,10 @@ int main()
   // game status
   bool GameOver = false;
   int s(0); //score
-  
+
   // the main playing window
   main_win = initial_playwin(height, width, 0, 0);
-  
+
   //build_boundary(field);
 
   // the score field
@@ -80,9 +86,9 @@ int main()
   mvprintw(3, width+5+2, "Best Score: %d", best_score);
   mvprintw(5, width+5+2, "Score: %d", s);
 
-  wrefresh(main_win); // update the main playing window
-  wrefresh(score_box); // update the score field
-  refresh();
+  wrefresh (main_win); // update the main playing window
+  wrefresh (score_box); // update the score field
+  refresh ();
 
   // initialize middle piece
   mtetris mp;
@@ -90,20 +96,28 @@ int main()
   mp.W = 1;
   mp.x = 30;
   mp.y = 15;
-	
+
   int ** middle_tetris = new int * [mp.H];
-  for (int i = 0; i < mp.H; i++) {
-    middle_tetris[i] = new int [mp.W];
+  for (int i = 0; i < mp.W; i++) {
+    middle_tetris[i] = new int [mp.H];
   }
-  
-  mvwaddch(main_win, mp.y, mp.x, '#');
+
   middle_tetris[0][0] = 1;
-  wrefresh(main_win);
+
+  // print the middle tetris
+  for (int i = 0; i < mp.H; i++) {
+    for (int j = 0; j < mp.W; j++) {
+      if (middle_tetris[i][j] == 1) {
+        mvwaddch (main_win, mp.y + j, mp.x + i, '#');
+      }
+    }
+  }
+  wrefresh (main_win);
 
   // initialize falling piece
   srand((unsigned)time(NULL));
   ftetris * fp = new ftetris;
-  initial_tetris( fp );
+  initial_tetris (fp);
 
   while(1){
     char cmd;
@@ -111,49 +125,55 @@ int main()
     // set waiting time
     fd_set readfd;
     FD_ZERO(&readfd);
-    FD_SET(0, &readfd);   
+    FD_SET(0, &readfd);
     struct timeval timeout;
     timeout.tv_sec = 0;
-    timeout.tv_usec= 200000;
+    timeout.tv_usec= 300000;
 
-    if (select(1, &readfd, NULL, NULL, &timeout) == 0){
+    if (select(1, &readfd, NULL, NULL, &timeout) == 0) {
+      if (check_collision (fp, mp, middle_tetris)) {
+        combine_tetris (middle_tetris, fp, mp);
+        elimination (mp, middle_tetris, s, main_win);
 
-      falling(fp, main_win);
-      mvprintw(7, width+5+2, "Position: %d", fp->choice_p);
-      wrefresh(score_box);
-
-      if (falling_boundary ( fp )) {
-        for(int i=0; i < (fp)->H; i++){
-          for(int j=0; j < (fp)->W; j++){
-            if((fp)->shape[i][j] == 1 && (fp)->y+i != 0 && (fp)->x+j != 0 && (fp)->y+i <= 30 && (fp)->x+j != 61){
-              mvwaddch(main_win, (fp)->y+i, (fp)->x+j, ' ');
+        GameOver = middle_boundary (mp, middle_tetris);
+        next (fp, main_win);
+      }
+      else {
+        falling (fp, main_win);
+      }
+      mvprintw(5, width+5+2, "Score: %d", s);
+      refresh();
+      // if falling piece touches boundary
+      if (falling_boundary (fp)) {
+        for (int i = 0; i < (fp)->H; i++){
+          for (int j = 0; j < (fp)->W; j++){
+            if ((fp)->shape[i][j] == 1 && (fp)->y + i != 0 && (fp)-> x + j != 0 && (fp)->y + i <= 30 && (fp)->x + j != 61) {
+              mvwaddch(main_win, (fp)->y+i, (fp)->x+j, ' '); // undisplay the units out of boundary
             }
           }
-        }  
+        }
         initial_tetris(fp);
-      } 
-
-      if(check_collision(fp, mp, middle_tetris) == true){
-        combine_tetris(middle_tetris, fp, mp);	
-        next(fp, main_win);	
       }
+      // collision and combination
 
       refresh();
     }
-        
-    if (FD_ISSET(0, &readfd)) {
-      cmd = getch();
 
+    if (FD_ISSET(0, &readfd)) {
+      // quit the game
+      cmd = getch();
       if (cmd == 'q') {
       break;
       }
-    
+      // read other commands
       mp.ctr = cmd;
-      move(mp, middle_tetris, fp, main_win); // move mp 
-      elimination(mp, middle_tetris, s);
-      GameOver = middle_boundary(mp, middle_tetris);
+      move (mp, middle_tetris, fp, main_win); // move mp
+      elimination (mp, middle_tetris, s, main_win);
+      mvprintw(5, width+5+2, "Score: %d", s);
+      refresh();
+      GameOver = middle_boundary (mp, middle_tetris);
     }
-
+    
     if(GameOver){
       break;
     }
@@ -164,7 +184,7 @@ int main()
 
   // output game status
   update_record (s, username);
-  
+
   // end the game
   delete [] middle_tetris;
   delete fp;
