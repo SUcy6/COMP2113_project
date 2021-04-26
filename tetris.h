@@ -10,9 +10,15 @@ const int height(32), width(62);
 // the score field
 const int sheight(15), swidth(30);
 
-// game status
-//bool GameOver = false;
-//int s(0); //score
+class Elimination
+{
+public:
+
+int x;
+int y;
+int side;
+
+};
 
 // falling tetrominoes
 class ftetris
@@ -61,13 +67,13 @@ WINDOW * initial_playwin(int, int, int, int); // initialize playing window
 
 
 // elimination.cpp
-void elimination(mtetris  &mp, int **  middle_tetris, int &s); // check whether a 3x3 matrix is formed & update score
+void elimination ( mtetris & mp, int ** middle_tetris, int & score, WINDOW * main_win ); // check whether a 3x3 matrix is formed & update score
 
 
 // falling_ctr.cpp 
-void move(mtetris  &mp, int ** middle_tetris, ftetris *& fp, WINDOW * main_win); // move middle piece & fall tetris
+void move(mtetris  &mp, int ** &middle_tetris, ftetris *& fp, WINDOW * main_win); // move middle piece & fall tetris
 
-void rotate(mtetris  &mp, int ** middle_tetris, ftetris *& fp, WINDOW * main_win); // rotate middle piece
+void rotate (mtetris mp, int ** middle_tetris, ftetris * & fp, WINDOW * main_win); // rotate middle piece
 
 void next(ftetris *& fp, WINDOW * main_win); // set next tetris
 
@@ -79,11 +85,10 @@ bool middle_boundary ( mtetris p, int ** middle_tetris );
 
 
 // check_collision.cpp
-bool check_collision ( ftetris *& fp, mtetris  &mp, int ** middle_tetris); //int orientation ); // check_collision 
-
+bool check_collision ( ftetris* fp, mtetris mp, int ** middle_tetris); // check_collision 
 
 // combine_tetris.cpp
-void combine_tetris ( int **  middle_tetris, ftetris *& fp, mtetris  &mp ); // combine collide pieces
+void combine_tetris ( int ** & middle_tetris, ftetris * fp, mtetris & mp ); // combine collide pieces
 
 // update_record.cpp 
 void update_record ( int new_score, std::string new_username ); // update record
