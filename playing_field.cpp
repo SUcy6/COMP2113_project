@@ -14,7 +14,7 @@ void build_boundary(int field[][62])
 	  else{
 		field[i][j]=0;
       }
-	}
+    }
   }
 }
 
@@ -34,4 +34,9 @@ WINDOW * initial_playwin(int Height, int Width, int a, int b)
   return win1;
 }
 
-
+void boundary_test(mtetris mp, int field[][62], bool GameOver)
+{
+  if((mp).x + (mp).W + 1 > width || (mp).x < 1 || (mp).y + (mp).H + 1 > height || (mp).y < 1){
+  GameOver = true;
+  }
+}
