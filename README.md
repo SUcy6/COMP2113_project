@@ -44,7 +44,7 @@ E.g. ####         #***       #
 NCURSES
 ## Compilation and execution instructions:
 - If you are a freshman to this game, please first type `./freshman.sh` in your terminal to install the ncurses library.(It will take a few minutes :D)
-- The shell script `freshman.sh` will make a directory called `group90` in your home directory. If the shell script fails, please download `group90` as provided above and make sure the path is `~/group90`.
+- The shell script `freshman.sh` will make a directory called `group90` in your home directory. If the shell script fails, please download `group90` as provided in https://drive.google.com/drive/folders/1ZwzzM3cEdS5fb49_o7Ip0iIvHp9O_IwC?usp=sharing and make sure the path is `~/group90`.
 - **Main Steps**:
 1. Type `make clean`.
 2. Type `make main`.
