@@ -11,76 +11,76 @@ void build_tetris(int &choice_s, int &choice_p, int shape[][4], int &H, int &W, 
   // build a 4x4 empty matrix to initialize a tetris piece
   for(int i = 0;i < 4; i++){
     for(int j = 0; j < 4; j++){
-	  shape[i][j]=0;
+    shape[i][j]=0;
     }
   }
 
   switch(choice_s)
   {
-	case 1:	// '####' shape
-	  H = 1;
-	  W = 4;	
+  case 1:	// '####' shape
+    H = 1;
+    W = 4;	
       for (int i = 0; i < 4; i++){
           shape[0][i] = 1;
       }
-	  break;
+    break;
 
-	case 2: 
+  case 2: 
     //         '#  ' shape
     //          ###   
-	  H = 2;
-	  W = 3;
-	  shape[0][0]=1;
+    H = 2;
+    W = 3;
+    shape[0][0]=1;
       for (int i = 0; i < 3; i++){
           shape[1][i] = 1;
       }
-	  break;
+    break;
 
-	case 3:
+  case 3:
     //         '  #' shape
     //          ### 
-	  H = 2;
-	  W = 3;	
-	  shape[0][2]=1;
-	  for (int i = 0; i < 3; i++){
+    H = 2;
+    W = 3;	
+    shape[0][2]=1;
+    for (int i = 0; i < 3; i++){
           shape[1][i] = 1;
       }
-	  break;
+    break;
 
-	case 4:
+  case 4:
     //        '## ' shape
     //          ##
-	  H = 2;
-	  W = 3;
-	  shape[0][0] = shape[0][1] = shape[1][1] = shape[1][2] = 1;
-	  break;
+    H = 2;
+    W = 3;
+    shape[0][0] = shape[0][1] = shape[1][1] = shape[1][2] = 1;
+    break;
     
     case 5:
     //        ' ##' shape
     //         ##
-	  H = 2;
-	  W = 3;
-	  shape[0][1] = shape[0][2] = shape[1][0] = shape[1][1] = 1;
-	  break;
+    H = 2;
+    W = 3;
+    shape[0][1] = shape[0][2] = shape[1][0] = shape[1][1] = 1;
+    break;
 
-	case 6:	
+  case 6:	
     //        '##' shape
     //         ##
-	  H = 2;
-	  W = 2;
-	  shape[0][0] = shape[0][1] = shape[1][0] = shape[1][1] = 1;
-	  break;
+    H = 2;
+    W = 2;
+    shape[0][0] = shape[0][1] = shape[1][0] = shape[1][1] = 1;
+    break;
 
-	case 7:	
+  case 7:	
     //        ' # ' shape
     //         ###
-	  H = 2;
-	  W = 3;
-	  shape[0][1]=1;
-	  for (int i = 0; i < 3; i++){
+    H = 2;
+    W = 3;
+    shape[0][1]=1;
+    for (int i = 0; i < 3; i++){
           shape[1][i] = 1;
     }
-	  break;
+    break;
   }
 
   // set falling tetris position
