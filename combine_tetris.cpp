@@ -1,4 +1,7 @@
 #include "tetris.h"
+#include <algorithm>
+
+using namespace std;
 
 // combine falling tetris and middle tetris to be the new middle tetris
 void combine_tetris ( int ** & middle_tetris, ftetris * fp, mtetris & mp )
