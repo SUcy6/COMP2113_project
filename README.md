@@ -54,3 +54,8 @@ NCURSES
 5. Enjoy the game. 
 ## Video: 
 https://drive.google.com/file/d/1xtwLgqEd8dDXyVX-Ntm3INM62tVAMHis/view?usp=sharing
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/ohAgEySTXrw/0.jpg)](https://www.youtube.com/watch?v=ohAgEySTXrw)
+
+https://www.youtube.com/watch?v=ohAgEySTXrw
+
